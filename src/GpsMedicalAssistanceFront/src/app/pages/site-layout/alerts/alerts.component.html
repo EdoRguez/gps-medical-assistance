@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="d-flex flex-column mt-4">
+        <h1 class="alert-title">Crea una alerta o busca una alerta</h1>
+        <span class="alert-description mt-2">Encuentra las últimas alertas reportadas de las personas que han notificado a sus familiares que ocurrió un accidente</span>
+        <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-main" [routerLink]="['create']">Crear Alerta</button>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12 col-sm-4 box-left desktop-filter">
+            <div class="filter-box">
+                <app-alerts-filter></app-alerts-filter>
+            </div>
+        </div>
+        <div class="col-12 col-sm-8 box-right">
+            <app-alerts-list></app-alerts-list>
+        </div>
+    </div>
+</div>

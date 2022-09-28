@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-12 d-flex flex-column align-items-center">
+        <img src="assets/icons/face_detection.png" class="face-icon">
+        <span class="face-information">Arrastra y suelta una imagen en el recuadro de abajo donde se vea tu rostro con buena resolución e iluminación</span>
+    </div>
+
+    <div class="col-12 d-flex flex-column align-items-center mt-5">
+        <label
+            class="uploader"
+            ondragover="return false;"
+            [class.loaded]="loaded"
+            [style.outlineColor]="getImageBoxColor()"
+            (dragenter)="handleDragEnter()"
+            (dragleave)="handleDragLeave()"
+            (drop)="handleDrop($event)"
+        >
+            <i
+                class="icon fa-regular fa-file"
+                [style.color]="getImageBoxColor()"
+            ></i>
+        
+            <img
+                [src]="imageSrc"
+                (load)="handleImageLoad()"
+                [class.loaded]="imageLoaded"
+            />
+        
+            <input
+                type="file"
+                name="file"
+                accept="image/*"
+                (change)="handleInputChange($event)"
+            />
+        </label>
+        <span *ngIf="showImageFormatError" class="text-danger mt-3">* El formato de imagen debe ser PNG, JPG o JPEG</span>
+        <span *ngIf="isSubmittedPage" class="text-danger mt-3">* Debe subir una imagen de su rostro</span>
+    </div>
+
+    <div class="col-12 d-flex justify-content-center mt-5">
+        <span class="face-information">GPS Medical Assistance utiliza reconocimiento facial para facilitar el trabajo de identificarte si sufres un accidente</span>
+    </div>
+
+    <div class="col-12">
+        <div class="w-100 d-flex justify-content-end mt-5">
+            <button type="button" class="btn btn-main d-flex" (click)="nextSetp()">
+                Siguiente
+                <div class="btn-icon-circle-right">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

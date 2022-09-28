@@ -1,0 +1,15 @@
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\bin\Debug\net6.0\Interfaces.deps.json
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\bin\Debug\net6.0\Interfaces.dll
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\bin\Debug\net6.0\Interfaces.pdb
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.csproj.AssemblyReference.cache
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.AssemblyInfoInputs.cache
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.AssemblyInfo.cs
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.dll
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\refint\Interfaces.dll
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.pdb
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\ref\Interfaces.dll
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\bin\Debug\net6.0\Entities.dll
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\bin\Debug\net6.0\Entities.pdb
+C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Interfaces\obj\Debug\net6.0\Interfaces.csproj.CopyComplete

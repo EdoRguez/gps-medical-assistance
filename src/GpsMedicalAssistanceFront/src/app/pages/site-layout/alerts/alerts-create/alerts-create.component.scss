@@ -1,0 +1,32 @@
+form {
+    font-family: "Roboto", sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.alert-title {
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    font-size: 36px;
+}
+
+.map-container {
+    height: 500px;
+}
+
+.map-frame {
+    border: 2px solid black;
+    height: 100%;
+}
+
+#map {
+    height: 100%;
+}

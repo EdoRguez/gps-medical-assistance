@@ -1,0 +1,78 @@
+<div class="container mt-4">
+    <button type="button" class="btn btn-main d-flex" [routerLink]="['..']">
+        <div class="btn-icon-circle-left">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        Regresar
+    </button>
+
+    <h1 class="alert-title">Crear Alerta</h1>
+
+    <div class="map-container">
+        <div class="map-frame">
+            <app-loader
+                *ngIf="isMapLoading"
+                [message]="'Cargando Mapa'"
+            ></app-loader>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <form>
+        <div class="row">
+            <div class="col-12 col-sm-6 offset-sm-3">
+                <div class="form-group mt-3">
+                    <label>Destino:</label>
+                    <input
+                        name="name"
+                        id="typeahead-http"
+                        type="text"
+                        class="form-control form-control-sm"
+                        [class.is-invalid]="searchFailedTextField"
+                        [(ngModel)]="model"
+                        [ngbTypeahead]="search"
+                        [resultFormatter]="formatter"
+                        [inputFormatter]="formatter"
+                        (selectItem)="onSelectDestination($event)"
+                    />
+                    <small
+                        *ngIf="searchingTextField"
+                        class="form-text text-muted"
+                        >Buscando...</small
+                    >
+                    <div class="invalid-feedback" *ngIf="searchFailedTextField">
+                        No se encontraron datos
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 offset-sm-3">
+                <div class="form-group mt-3">
+                    <label>Cédula:</label>
+                    <div class="row">
+                        <div class="col-2">
+                            <select class="form-control form-control-sm">
+                                <option selected>-</option>
+                                <option value="V">V</option>
+                                <option value="J">J</option>
+                                <option value="E">E</option>
+                                <option value="P">P</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                        <div class="col-10">
+                            <input
+                                type="number"
+                                class="form-control form-control-sm"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br>
+<br>
+<br>
+<br>

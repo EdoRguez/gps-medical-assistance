@@ -1,0 +1,31 @@
+.alert-title {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 36px;
+}
+
+.alert-description {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.box-left {
+    border-top: 1.5px solid #cccccc;
+    border-bottom: 1.5px solid #cccccc;
+}
+
+.box-right {
+    border: 1.5px solid #cccccc;
+    padding: 0px;
+}
+
+.filter-box {
+    padding: 20px 100px;
+}
+
+@media screen and (max-width: 990px) {
+    .desktop-filter {
+        display: none;
+    }
+    
+}

@@ -1,0 +1,26 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" ngbAutofocus>
+            {{ title }}
+        </h4>
+        <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="activeModal.close()"
+        ></button>
+    </div>
+    <div class="modal-body">
+        <span>{{ description }}</span>
+    </div>
+    <div class="modal-footer d-flex justify-content-end">
+        <button
+            type="button"
+            class="btn btn-main"
+            (click)="activeModal.close(true)"
+        >
+            Ok
+        </button>
+    </div>
+</div>
+

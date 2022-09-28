@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" [routerLink]="['']">
+            <img src="assets/icons/logo.png" width="30" height="30" />
+            <span class="logo-text">GPS Medical Assistance</span>
+        </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            (click)="toggleNavbar = !toggleNavbar"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="toggleNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item mx-3">
+                    <a
+                        class="nav-link hover-link"
+                        aria-current="page"
+                        [routerLink]="['']"
+                        [routerLinkActive]="['active-route']"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        >Inicio</a
+                    >
+                </li>
+                <li class="nav-item mx-3" *ngIf="!isUserLogged">
+                    <a
+                        class="nav-link hover-link"
+                        [routerLink]="['register']"
+                        [routerLinkActive]="['active-route']"
+                        >Registrarse</a
+                    >
+                </li>
+                <li class="nav-item mx-3" *ngIf="!isUserLogged">
+                    <a
+                        class="nav-link hover-link"
+                        [routerLink]="['login']"
+                        [routerLinkActive]="['active-route']"
+                        >Iniciar Sesión</a
+                    >
+                </li>
+                <li class="nav-item mx-3" *ngIf="isUserLogged">
+                    <a
+                        class="nav-link hover-link"
+                        [routerLink]="['account']"
+                        [routerLinkActive]="['active-route']"
+                        >Cuenta</a
+                    >
+                </li>
+                <li class="nav-item mx-3" *ngIf="isUserLogged">
+                    <a
+                        class="nav-link hover-link"
+                        (click)="onLogout()"
+                        >Cerrar Sesión</a
+                    >
+                </li>
+                <li class="nav-item mx-3">
+                    <div class="nav-link nav-person-box" [routerLink]="['alerts']">
+                        <span class="nav-person-text">Alertas</span>
+                        <div class="nav-person-circle">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

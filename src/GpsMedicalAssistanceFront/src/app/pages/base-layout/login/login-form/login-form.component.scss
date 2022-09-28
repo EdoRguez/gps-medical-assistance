@@ -1,0 +1,11 @@
+* {
+    > :not(i) {
+        font-family: 'Roboto', sans-serif;
+    }
+}
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    color: #dc3545;
+}

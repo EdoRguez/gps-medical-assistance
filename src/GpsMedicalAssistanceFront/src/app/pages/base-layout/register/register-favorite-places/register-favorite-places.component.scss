@@ -1,0 +1,30 @@
+* {
+    > :not(i) {
+        font-family: "Roboto", sans-serif;
+    }
+}
+
+th,
+tr,
+span {
+    font-size: 14px;
+}
+
+.table-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.delete-table-button {
+    text-align: center;
+}
+
+.delete-table-button:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 990px) {
+    .mobile-scroll {
+        overflow-x: scroll;
+    }
+}

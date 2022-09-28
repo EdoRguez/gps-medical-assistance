@@ -1,0 +1,54 @@
+<form [formGroup]="form">
+    <div class="row">
+        <div class="col-12 col-sm-6 offset-sm-3">
+            <div class="form-group mt-3">
+                <label>Correo:</label>
+                <input
+                    type="email"
+                    class="form-control form-control-sm"
+                    [class.is-invalid]="
+                        form.controls['email'].invalid && isFormSubmitted
+                    "
+                    [class.is-valid]="form.controls['email'].valid"
+                    formControlName="email"
+                    maxlength="50"
+                />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 offset-sm-3">
+            <div class="form-group mt-3">
+                <label>Contraseña:</label>
+                <input
+                    formControlName="password"
+                    type="password"
+                    class="form-control form-control-sm"
+                    maxlength="15"
+                    [class.is-invalid]="
+                        form.controls['password'].invalid && isFormSubmitted
+                    "
+                    [class.is-valid]="form.controls['password'].valid"
+                />
+            </div>
+        </div>
+    </div>
+
+    <span class="error-message" [style.opacity]="isLoginError ? 1 : 0"
+        >* El usuario o la contraseña es inválido</span
+    >
+
+    <div class="w-100 d-flex justify-content-center mt-4">
+        <button
+            type="button"
+            class="btn btn-main d-flex"
+            (click)="onSubmitForm()"
+        >
+            Iniciar Sesión
+            <div class="btn-icon-circle-right">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </button>
+    </div>
+</form>

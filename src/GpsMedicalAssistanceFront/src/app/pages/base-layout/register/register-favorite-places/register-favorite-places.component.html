@@ -1,0 +1,83 @@
+<div class="mt-2">
+    <span class="register-description"
+        >Ingresa los hospitales o clínicas de preferencia para ser trasladado</span
+    >
+</div>
+
+
+<div class="row">
+    <div class="col-12 col-sm-5 mt-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Lugar de Preferencia:</label>
+                    <input
+                        #inputSearch
+                        name="name"
+                        id="typeahead-http"
+                        type="text"
+                        class="form-control form-control-sm"
+                        [class.is-invalid]="searchFailedTextField"
+                        [(ngModel)]="model"
+                        [ngbTypeahead]="search"
+                        [resultFormatter]="formatter"
+                        [inputFormatter]="formatter"
+                        (selectItem)="onSelectDestination($event, inputSearch)"
+                    />
+                    <small
+                        *ngIf="searchingTextField"
+                        class="form-text text-muted"
+                        >Buscando...</small
+                    >
+                    <div class="invalid-feedback" *ngIf="searchFailedTextField">
+                        No se encontraron datos
+                    </div>
+                    <br>
+                    <span class="text-danger" *ngIf="isPlaceAlreadyAdded">* La dirección ya fue agregada</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-7">
+        <div class="mobile-scroll">
+            <table class="table table-striped mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">Lugar</th>
+                        <th scope="col" class="text-center">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let place of favoritePlaces; let i = index">
+                        <td>{{ place.name }}</td>
+                        <td class="delete-table-button" (click)="onDeleteFavoritePlace(i)">
+                            <i class="fa-solid fa-trash-can text-danger"></i>
+                        </td>
+                    </tr>
+                    <tr *ngIf="favoritePlaces.length < 1">
+                        <td colspan="2" class="text-center">
+                            <span class="text-danger"
+                                >Debe agregar al menos 1 lugar de preferencia</span
+                            >
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="w-100 d-flex justify-content-between mt-5">
+    <button type="button" class="btn btn-main d-flex" (click)="goBack()">
+        <div class="btn-icon-circle-left">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        Regresar
+    </button>
+    <button type="button" class="btn btn-main d-flex" (click)="nextSetp()" *ngIf="favoritePlaces.length > 0">
+        Siguiente
+        <div class="btn-icon-circle-right">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </button>
+</div>

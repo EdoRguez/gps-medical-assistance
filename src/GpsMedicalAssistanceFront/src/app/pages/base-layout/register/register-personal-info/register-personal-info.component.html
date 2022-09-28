@@ -1,0 +1,275 @@
+<form [formGroup]="form">
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Nombre:</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    maxlength="20"
+                    [class.is-invalid]="
+                        form.controls['name'].invalid && isFormSubmitted
+                    "
+                    [class.is-valid]="form.controls['name'].valid"
+                    formControlName="name"
+                />
+                <span
+                    *ngIf="form.controls['name'].invalid && isFormSubmitted"
+                    class="invalid-feedback"
+                    >* Nombre es requerido y mínimo 4 caracteres</span
+                >
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Apellido:</label>
+                <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    maxlength="20"
+                    [class.is-invalid]="
+                        form.controls['lastName'].invalid && isFormSubmitted
+                    "
+                    [class.is-valid]="form.controls['lastName'].valid"
+                    formControlName="lastName"
+                />
+                <span
+                    *ngIf="form.controls['lastName'].invalid && isFormSubmitted"
+                    class="invalid-feedback"
+                    >* Apellido es requerido y mínimo 4 caracteres</span
+                >
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Correo:</label>
+                <input
+                    type="email"
+                    class="form-control form-control-sm"
+                    [class.is-invalid]="
+                        form.controls['email'].invalid && isFormSubmitted
+                    "
+                    [class.is-valid]="form.controls['email'].valid"
+                    formControlName="email"
+                    maxlength="50"
+                />
+                <span
+                    *ngIf="form.controls['email'].invalid && isFormSubmitted"
+                    class="invalid-feedback"
+                    >* Correo es requerido y debe ser válido</span
+                >
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Cédula:</label>
+                <div class="row">
+                    <div class="col-3">
+                        <select
+                            class="form-control form-control-sm"
+                            formControlName="identificationType"
+                            [class.is-invalid]="
+                                form.controls['identificationType'].invalid &&
+                                isFormSubmitted
+                            "
+                            [class.is-valid]="
+                                form.controls['identificationType'].valid
+                            "
+                        >
+                            <option value="" selected>-</option>
+                            <option value="V">V</option>
+                            <option value="J">J</option>
+                            <option value="E">E</option>
+                            <option value="P">P</option>
+                            <option value="G">G</option>
+                        </select>
+                    </div>
+                    <div class="col-9">
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            maxlength="9"
+                            formControlName="identification"
+                            [class.is-invalid]="
+                                form.controls['identification'].invalid &&
+                                isFormSubmitted
+                            "
+                            [class.is-valid]="
+                                form.controls['identification'].valid
+                            "
+                        />
+                        <span
+                            *ngIf="
+                                form.controls['identification'].invalid &&
+                                isFormSubmitted
+                            "
+                            class="invalid-feedback"
+                            >* La cédula es requerida y debe ser válida</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Teléfono:</label>
+                <div class="row">
+                    <div class="col-3">
+                        <select
+                            class="form-control form-control-sm"
+                            formControlName="phoneType"
+                            [class.is-invalid]="
+                                form.controls['phoneType'].invalid &&
+                                isFormSubmitted
+                            "
+                            [class.is-valid]="form.controls['phoneType'].valid"
+                        >
+                            <option value="" selected>-</option>
+                            <option value="0414">0414</option>
+                            <option value="0424">0424</option>
+                            <option value="0412">0412</option>
+                            <option value="0416">0416</option>
+                            <option value="0426">0426</option>
+                        </select>
+                    </div>
+
+                    <div class="col-9">
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            maxlength="7"
+                            formControlName="phone"
+                            [class.is-invalid]="
+                                form.controls['phone'].invalid &&
+                                isFormSubmitted
+                            "
+                            [class.is-valid]="form.controls['phone'].valid"
+                        />
+                        <span
+                            *ngIf="
+                                form.controls['phone'].invalid &&
+                                isFormSubmitted
+                            "
+                            class="invalid-feedback"
+                            >* El teléfono es requerido y debe ser válido</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Fecha de Nacimiento:</label>
+                <div class="input-group">
+                    <input
+                        class="form-control form-control-sm"
+                        placeholder="día-mes-año"
+                        name="dp"
+                        (click)="d.toggle()"
+                        ngbDatepicker
+                        readonly="readonly"
+                        formControlName="birthDate"
+                        #d="ngbDatepicker"
+                        [maxDate]="{
+                            year: currentDate.getFullYear(),
+                            month: currentDate.getMonth(),
+                            day: currentDate.getDay()
+                        }"
+                        [class.is-invalid]="
+                            form.controls['birthDate'].invalid &&
+                            isFormSubmitted
+                        "
+                        [class.is-valid]="form.controls['birthDate'].valid"
+                    />
+                    <button
+                        class="input-button-in-group"
+                        (click)="d.toggle()"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </button>
+                    <span
+                        *ngIf="
+                            form.controls['birthDate'].invalid &&
+                            isFormSubmitted
+                        "
+                        class="invalid-feedback"
+                        >* La fecha de nacimiento es requerida</span
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Contraseña:</label>
+                <input
+                    formControlName="password"
+                    type="password"
+                    class="form-control form-control-sm"
+                    maxlength="15"
+                    [class.is-invalid]="
+                        form.controls['password'].invalid && isFormSubmitted
+                    "
+                    [class.is-valid]="form.controls['password'].valid"
+                />
+                <span
+                    *ngIf="form.controls['password'].invalid && isFormSubmitted"
+                    class="invalid-feedback"
+                    >* La contraseña es requerida y debe de tener al menos 6
+                    caracteres</span
+                >
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="form-group mt-3">
+                <label>Confirmar contraseña:</label>
+                <input
+                    formControlName="confirmPassword"
+                    type="password"
+                    class="form-control form-control-sm"
+                    maxlength="15"
+                    [class.is-invalid]="
+                        form.getError('mismatch') && isFormSubmitted
+                    "
+                    [class.is-valid]="form.controls['confirmPassword'].valid"
+                />
+                <span
+                    *ngIf="form.getError('mismatch') && isFormSubmitted"
+                    class="invalid-feedback"
+                    >* Las contraseñas no coinciden</span
+                >
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="w-100 d-flex justify-content-between mt-5">
+        <button type="button" class="btn btn-main d-flex" (click)="goBack()">
+            <div class="btn-icon-circle-left">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            Regresar
+        </button>
+        <button
+            type="button"
+            class="btn btn-main d-flex"
+            (click)="onSubmitForm()"
+        >
+            Siguiente
+            <div class="btn-icon-circle-right">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </button>
+    </div>
+</form>

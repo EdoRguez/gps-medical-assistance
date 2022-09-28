@@ -1,0 +1,276 @@
+<div class="mt-2">
+    <span
+        >Ingresa los familiares a notificar en caso de un accidente</span
+    >
+</div>
+
+<div class="mt-5 d-flex justify-content-between align-items-center">
+    <span class="table-title">Familiares</span>
+    <button class="btn btn-main" (click)="open(modalFamily)">Agregar +</button>
+</div>
+
+<div class="mobile-scroll">
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Cédula</th>
+                <th scope="col">Relación</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col" class="text-center">Editar</th>
+                <th scope="col" class="text-center">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let family of families; let i = index">
+                <td>{{ family.name }}</td>
+                <td>{{ family.lastName }}</td>
+                <td>{{ family.identification }}</td>
+                <td>{{ getFamilyTypeNameById(family.id_FamilyType) }}</td>
+                <td>{{ family.phone }}</td>
+                <td
+                    class="edit-table-button"
+                    (click)="onEditFamily(i, modalFamily)"
+                >
+                    <i class="fa-solid fa-pen-to-square text-success"></i>
+                </td>
+                <td class="delete-table-button" (click)="onDeleteFamily(i)">
+                    <i class="fa-solid fa-trash-can text-danger"></i>
+                </td>
+            </tr>
+            <tr *ngIf="families.length < 2">
+                <td colspan="8" class="text-center">
+                    <span class="text-danger"
+                        >Debe agregar al menos 2 familiares</span
+                    >
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="w-100 d-flex justify-content-between mt-5">
+    <button type="button" class="btn btn-main d-flex" (click)="goBack()">
+        <div class="btn-icon-circle-left">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        Regresar
+    </button>
+    <button type="button" class="btn btn-main d-flex" *ngIf="families.length > 1" (click)="nextSetp()">
+        Siguiente
+        <div class="btn-icon-circle-right">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </button>
+</div>
+
+<ng-template #modalFamily let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" ngbAutofocus>
+            Agregar Familiar
+        </h4>
+        <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modal.dismiss()"
+        ></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group mt-3">
+                        <label>Nombre:</label>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            formControlName="name"
+                            maxlength="20"
+                            [class.is-invalid]="
+                                form.controls['name'].invalid && isFormSubmitted
+                            "
+                            [class.is-valid]="form.controls['name'].valid"
+                        />
+                        <span
+                            *ngIf="
+                                form.controls['name'].invalid && isFormSubmitted
+                            "
+                            class="invalid-feedback"
+                            >* Nombre es requerido y mínimo 4 caracteres</span
+                        >
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group mt-3">
+                        <label>Apellido:</label>
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            formControlName="lastName"
+                            maxlength="20"
+                            [class.is-invalid]="
+                                form.controls['lastName'].invalid &&
+                                isFormSubmitted
+                            "
+                            [class.is-valid]="form.controls['lastName'].valid"
+                        />
+                        <span
+                            *ngIf="
+                                form.controls['lastName'].invalid &&
+                                isFormSubmitted
+                            "
+                            class="invalid-feedback"
+                            >* Apellido es requerido y mínimo 4 caracteres</span
+                        >
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group mt-3">
+                        <label>Cédula:</label>
+                        <div class="row">
+                            <div class="col-3">
+                                <select
+                                    class="form-control form-control-sm"
+                                    formControlName="identificationType"
+                                    [class.is-invalid]="
+                                        form.controls['identificationType']
+                                            .invalid && isFormSubmitted
+                                    "
+                                    [class.is-valid]="
+                                        form.controls['identificationType']
+                                            .valid
+                                    "
+                                >
+                                    <option value="" selected>-</option>
+                                    <option value="V">V</option>
+                                    <option value="J">J</option>
+                                    <option value="E">E</option>
+                                    <option value="P">P</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                            <div class="col-9">
+                                <input
+                                    type="text"
+                                    class="form-control form-control-sm"
+                                    formControlName="identification"
+                                    maxlength="9"
+                                    [class.is-invalid]="
+                                        form.controls['identification']
+                                            .invalid && isFormSubmitted
+                                    "
+                                    [class.is-valid]="
+                                        form.controls['identification'].valid
+                                    "
+                                />
+                                <span
+                                    *ngIf="
+                                        form.controls['identification']
+                                            .invalid && isFormSubmitted
+                                    "
+                                    class="invalid-feedback"
+                                    >* Cédula es requerida y debe de ser
+                                    válida</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group mt-3">
+                        <label>Relación:</label>
+                        <div class="row">
+                            <div class="col-12">
+                                <select
+                                    class="form-control form-control-sm"
+                                    formControlName="id_FamilyType"
+                                    [class.is-invalid]="
+                                        form.controls['id_FamilyType']
+                                            .invalid && isFormSubmitted
+                                    "
+                                    [class.is-valid]="
+                                        form.controls['id_FamilyType'].valid
+                                    "
+                                >
+                                    <option value="" selected>-</option>
+                                    <option *ngFor="let familyType of familyTypes" [value]="familyType.id">{{ familyType.name }}</option>
+                                </select>
+                                <span
+                                    *ngIf="
+                                        form.controls['id_FamilyType']
+                                            .invalid && isFormSubmitted
+                                    "
+                                    class="invalid-feedback"
+                                    >* La relación familiar es requerida</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group mt-3">
+                        <label>Teléfono:</label>
+                        <div class="row">
+                            <div class="col-3">
+                                <select
+                                    class="form-control form-control-sm"
+                                    formControlName="phoneType"
+                                    [class.is-invalid]="
+                                        form.controls['phoneType'].invalid &&
+                                        isFormSubmitted
+                                    "
+                                    [class.is-valid]="
+                                        form.controls['phoneType'].valid
+                                    "
+                                >
+                                    <option value="" selected>-</option>
+                                    <option value="0414">0414</option>
+                                    <option value="0424">0424</option>
+                                    <option value="0412">0412</option>
+                                    <option value="0416">0416</option>
+                                    <option value="0426">0426</option>
+                                </select>
+                            </div>
+
+                            <div class="col-9">
+                                <input
+                                    type="text"
+                                    class="form-control form-control-sm"
+                                    formControlName="phone"
+                                    maxlength="7"
+                                    [class.is-invalid]="
+                                        form.controls['phone'].invalid &&
+                                        isFormSubmitted
+                                    "
+                                    [class.is-valid]="
+                                        form.controls['phone'].valid
+                                    "
+                                />
+                                <span
+                                    *ngIf="
+                                        form.controls['phone'].invalid &&
+                                        isFormSubmitted
+                                    "
+                                    class="invalid-feedback"
+                                    >* Teléfono es requerido y debe de ser
+                                    válido</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button
+            type="button"
+            class="btn btn-main"
+            (click)="onSubmitModalForm()"
+        >
+            {{ this.formMode === formModeCreation ? "Agregar" : "Actualizar" }}
+        </button>
+    </div>
+</ng-template>
