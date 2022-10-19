@@ -1,3 +1,6 @@
+import { Family } from "./family.interface";
+import { FavoritePlace } from "./favorite-place.interface";
+
 export interface User {
     id: number,
     name: string,
@@ -6,5 +9,7 @@ export interface User {
     identification: string,
     phone: string,
     birthDate: Date,
-    imagePath: string
+    imagePath: string,
+    families: Family[],
+    favoritePlaces: FavoritePlace[]
 }

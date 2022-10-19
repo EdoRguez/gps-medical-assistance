@@ -47,5 +47,6 @@ namespace Entities.Models
 
         public ICollection<Family> Families { get; set; }
         public ICollection<FavoritePlace> FavoritePlaces { get; set; }
+        public ICollection<AlertUser> AlertUsers { get; set; }
     }
 }

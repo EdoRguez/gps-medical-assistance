@@ -60,6 +60,21 @@ namespace Repository.Core
             return _context.Set<T>().AsNoTracking();
         }
 
+        public IQueryable<T> FindAll(List<string> includes, bool trackChanges)
+        {
+            var query = _context.Set<T>().AsQueryable();
+
+            foreach(string include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            if (trackChanges)
+                return query;
+
+            return query.AsNoTracking();
+        }
+
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
         {
             if (trackChanges)

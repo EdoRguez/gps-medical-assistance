@@ -1,8 +1,10 @@
 ﻿using Entities;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Repository.Core;
+using Repository.Extensions;
 
 namespace Repository
 {
@@ -15,14 +17,14 @@ namespace Repository
             Create(model);
         }
 
-        public async Task<User> GetUser(int id, bool trackChanges)
+        public async Task<User> GetUser(int id, List<string> includes, bool trackChanges)
         {
-            return await FindSingleByCondition(x => x.Id.Equals(id), trackChanges);
+            return await FindSingleByCondition(x => x.Id.Equals(id), includes, trackChanges);
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers(bool trackChanges)
+        public async Task<IEnumerable<User>> GetAllUsers(UserParameters userParameters, bool trackChanges)
         {
-            return await FindAll(trackChanges).ToListAsync();
+            return await FindAll(userParameters.Includes, trackChanges).FilterUsers(userParameters).ToListAsync();
         }
     }
 }

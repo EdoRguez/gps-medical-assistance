@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertsCreateComponent } from './alerts-create/alerts-create.component';
 import { RouterModule } from '@angular/router';
 import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
+import { ModalAlertUserComponent } from './alerts-create/modal-alert-user/modal-alert-user.component';
 
 registerLocaleData(localeEs, 'es', localeEsExtra);
 
@@ -22,7 +23,8 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
     AlertsComponent,
     AlertsFilterComponent,
     AlertsListComponent,
-    AlertsCreateComponent
+    AlertsCreateComponent,
+    ModalAlertUserComponent
   ],
   imports: [
     CommonModule,

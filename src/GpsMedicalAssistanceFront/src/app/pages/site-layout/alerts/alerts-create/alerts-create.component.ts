@@ -11,6 +11,13 @@ import {
 } from 'rxjs';
 import { MapSearchLocation } from 'src/app/shared/interfaces/mapSearchLocation.interface';
 import * as L from 'leaflet';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoaderService } from 'src/app/shared/services/general/loader.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from 'src/app/shared/services/user/user.service';
+import { UserParameters } from 'src/app/shared/services/request-features/user-parameters.interface';
+import { User } from 'src/app/shared/interfaces/user.interface';
+import { ModalAlertUserComponent } from 'src/app/pages/site-layout/alerts/alerts-create/modal-alert-user/modal-alert-user.component';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -19,10 +26,19 @@ const shadowUrl = 'assets/marker-shadow.png';
 @Component({
     selector: 'app-alerts-create',
     templateUrl: './alerts-create.component.html',
-    styleUrls: ['./alerts-create.component.scss']
+    styleUrls: ['./alerts-create.component.scss'],
 })
 export class AlertsCreateComponent implements OnInit {
     isMapLoading: boolean = true;
+    isPageLoading: boolean = false;
+    isDestinationSelected: boolean = false;
+    isFormSubmitted: boolean = false;
+
+    form: FormGroup = new FormGroup({
+        destination: new FormControl(null, [Validators.required]),
+        identificationType: new FormControl('', [Validators.required]),
+        identification: new FormControl(null, [Validators.required]),
+    });
 
     model: any;
     searchingTextField = false;
@@ -34,12 +50,14 @@ export class AlertsCreateComponent implements OnInit {
     private zoom!: number;
 
     constructor(
-        private _mapSearchLocationService: MapSearchLocationService,
+        private _mapSearchLocationSvc: MapSearchLocationService,
+        private loaderSvc: LoaderService,
+        private modalService: NgbModal,
+        private userSvc: UserService
     ) {
         // navigator.geolocation.getCurrentPosition(
         //     (result: GeolocationPosition) => {
         //         this.isMapLoading = false;
-
         //         this.lat = result.coords.latitude;
         //         this.lon = result.coords.longitude;
         //         this.zoom = 17;
@@ -59,6 +77,64 @@ export class AlertsCreateComponent implements OnInit {
         this.zoom = 17;
 
         this.initMap();
+
+        const params: UserParameters = {
+            identificationType: 'V',
+            identification: '27246754',
+            includes: ['FavoritePlaces'],
+        };
+
+        this.userSvc.getAll(params).subscribe((users: User[]) => {
+            if (users) {
+                console.log(users[0]);
+                this.isPageLoading = false;
+                this.loaderSvc.toggleLoader(false);
+
+                const modalAlertUserRef = this.modalService.open(
+                    ModalAlertUserComponent,
+                    {
+                        backdrop: 'static',
+                        keyboard: false,
+                        size: 'lg'
+                    }
+                );
+                modalAlertUserRef.componentInstance.user = users[0];
+            }
+        });
+    }
+
+    onSubmitForm(): void {
+        this.isFormSubmitted = true;
+
+        if (this.form.valid) {
+            this.loaderSvc.toggleLoader(true, 'Creando alerta..');
+            this.isPageLoading = true;
+
+            const params: UserParameters = {
+                identificationType:
+                    this.form.controls['identificationType'].value,
+                identification: this.form.controls['identification'].value,
+                includes: ['FavoritePlaces'],
+            };
+
+            this.userSvc.getAll(params).subscribe((users: User[]) => {
+                if (users) {
+                    console.log(users[0]);
+                    this.isPageLoading = false;
+                    this.loaderSvc.toggleLoader(false);
+
+                    const modalAlertUserRef = this.modalService.open(
+                        ModalAlertUserComponent,
+                        {
+                            backdrop: 'static',
+                            keyboard: false,
+                            size: 'lg'
+                        }
+                    );
+                    modalAlertUserRef.componentInstance.user = users[0];
+                }
+            });
+        }
     }
 
     private initMap(): void {
@@ -93,12 +169,15 @@ export class AlertsCreateComponent implements OnInit {
         tiles.addTo(this.map);
 
         //marca con pop up
-        const marker = L.marker([this.lat, this.lon]).bindPopup('Ubicación Actual', {
-            keepInView: false,
-            closeButton: false,
-            closeOnClick: false,
-            autoClose: false
-        });
+        const marker = L.marker([this.lat, this.lon]).bindPopup(
+            'Ubicación Actual',
+            {
+                keepInView: false,
+                closeButton: false,
+                closeOnClick: false,
+                autoClose: false,
+            }
+        );
         marker.addTo(this.map);
         marker.openPopup();
 
@@ -113,6 +192,8 @@ export class AlertsCreateComponent implements OnInit {
     onSelectDestination(event: any): void {
         const mapDestination: MapSearchLocation = event.item;
 
+        this.isDestinationSelected = true;
+
         const marker = L.marker([
             Number(mapDestination.lat),
             Number(mapDestination.lon),
@@ -120,14 +201,16 @@ export class AlertsCreateComponent implements OnInit {
             keepInView: false,
             closeButton: false,
             closeOnClick: false,
-            autoClose: false
+            autoClose: false,
         });
 
-        
         marker.addTo(this.map);
         marker.openPopup();
 
-        const mark = L.circleMarker([Number(mapDestination.lat), Number(mapDestination.lon)]).addTo(this.map);
+        const mark = L.circleMarker([
+            Number(mapDestination.lat),
+            Number(mapDestination.lon),
+        ]).addTo(this.map);
         mark.addTo(this.map);
 
         let markerList: L.Layer[] = [];
@@ -135,21 +218,21 @@ export class AlertsCreateComponent implements OnInit {
         this.map.eachLayer((layer: any) => {
             if (layer instanceof L.Marker) {
                 markerList.push(layer);
-            };
+            }
 
-            if(layer instanceof L.CircleMarker) {
+            if (layer instanceof L.CircleMarker) {
                 circleMarkerList.push(layer);
             }
         });
-        
-        if(markerList.length > 2) {
+
+        if (markerList.length > 2) {
             this.map.removeLayer(markerList[1]);
         }
 
-        if(circleMarkerList.length > 2) {
+        if (circleMarkerList.length > 2) {
             this.map.removeLayer(circleMarkerList[1]);
         }
-        
+
         var group = L.featureGroup(markerList);
         this.map.fitBounds(group.getBounds());
     }
@@ -160,7 +243,7 @@ export class AlertsCreateComponent implements OnInit {
             distinctUntilChanged(),
             tap(() => (this.searchingTextField = true)),
             switchMap((term) =>
-                this._mapSearchLocationService.searchLocationByQuery(term).pipe(
+                this._mapSearchLocationSvc.searchLocationByQuery(term).pipe(
                     tap(() => (this.searchFailedTextField = false)),
                     catchError((e) => {
                         this.searchFailedTextField = true;

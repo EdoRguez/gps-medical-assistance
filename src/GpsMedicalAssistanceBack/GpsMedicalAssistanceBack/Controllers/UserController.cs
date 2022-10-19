@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.User;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Interfaces.Core;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +22,9 @@ namespace GpsMedicalAssistanceBack.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] UserParameters userParameters)
         {
-            var users = await _repo.User.GetAllUsers(false);
+            var users = await _repo.User.GetAllUsers(userParameters, false);
             var dto = _mapper.Map<IEnumerable<UserDto>>(users);
             return Ok(dto);
         }
@@ -32,8 +33,17 @@ namespace GpsMedicalAssistanceBack.Controllers
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _repo.User.GetUser(id, false);
-            return Ok(user);
+            List<string> includes = new List<string>
+            {
+                "Families",
+                "FavoritePlaces"
+            };
+
+            var user = await _repo.User.GetUser(id, includes, false);
+
+            var dto = _mapper.Map<UserDto>(user);
+
+            return Ok(dto);
         }
 
         // POST api/<UserController>

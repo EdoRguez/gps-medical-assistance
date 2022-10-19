@@ -8,7 +8,7 @@
 
     <h1 class="alert-title">Crear Alerta</h1>
 
-    <div class="map-container">
+    <div class="map-container" [style.opacity]="(isPageLoading) ? '.5' : '1'">
         <div class="map-frame">
             <app-loader
                 *ngIf="isMapLoading"
@@ -18,13 +18,13 @@
         </div>
     </div>
 
-    <form>
+    <form [formGroup]="form">
         <div class="row">
             <div class="col-12 col-sm-6 offset-sm-3">
                 <div class="form-group mt-3">
                     <label>Destino:</label>
                     <input
-                        name="name"
+                        formControlName="destination"
                         id="typeahead-http"
                         type="text"
                         class="form-control form-control-sm"
@@ -34,6 +34,11 @@
                         [resultFormatter]="formatter"
                         [inputFormatter]="formatter"
                         (selectItem)="onSelectDestination($event)"
+                        [class.is-invalid]="
+                            form.controls['destination'].invalid &&
+                            isFormSubmitted
+                        "
+                        [class.is-valid]="form.controls['destination'].valid && isDestinationSelected"
                     />
                     <small
                         *ngIf="searchingTextField"
@@ -47,11 +52,21 @@
             </div>
             <div class="col-12 col-sm-6 offset-sm-3">
                 <div class="form-group mt-3">
-                    <label>Cédula:</label>
+                    <label>Cédula del afectado:</label>
                     <div class="row">
                         <div class="col-2">
-                            <select class="form-control form-control-sm">
-                                <option selected>-</option>
+                            <select
+                                formControlName="identificationType"
+                                class="form-control form-control-sm"
+                                [class.is-invalid]="
+                                    form.controls['identificationType']
+                                        .invalid && isFormSubmitted
+                                "
+                                [class.is-valid]="
+                                    form.controls['identificationType'].valid
+                                "
+                            >
+                                <option value="">-</option>
                                 <option value="V">V</option>
                                 <option value="J">J</option>
                                 <option value="E">E</option>
@@ -61,18 +76,44 @@
                         </div>
                         <div class="col-10">
                             <input
-                                type="number"
+                                formControlName="identification"
+                                type="text"
+                                maxlength="9"
                                 class="form-control form-control-sm"
+                                [class.is-invalid]="
+                                    form.controls['identification'].invalid &&
+                                    isFormSubmitted
+                                "
+                                [class.is-valid]="
+                                    form.controls['identification'].valid
+                                "
                             />
+                            <span
+                                *ngIf="
+                                    form.controls['identification'].invalid &&
+                                    isFormSubmitted
+                                "
+                                class="invalid-feedback"
+                                >* La cédula es requrida</span
+                            >
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-5">
+                <button
+                    type="button"
+                    class="btn btn-main"
+                    (click)="onSubmitForm()"
+                >
+                    CREAR ALERTA
+                </button>
             </div>
         </div>
     </form>
 </div>
 
-<br>
-<br>
-<br>
-<br>
+<br />
+<br />
+<br />
+<br />

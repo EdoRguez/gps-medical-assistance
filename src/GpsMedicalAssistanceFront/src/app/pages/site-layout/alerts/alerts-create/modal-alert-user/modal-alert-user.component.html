@@ -1,0 +1,56 @@
+<div class="modal-header d-flex justify-content-center">
+    <h4 class="modal-title" ngbAutofocus>Usuario Encontrado</h4>
+</div>
+<div class="modal-body">
+    <p class="text-center">Se encontraron datos asociados al número de cédula.</p>
+
+    <div class="d-flex justify-content-center">    
+        <img class="img-fluid profile-img" [src]="'data:image/jpeg;base64,' + user.imagePath" >
+    </div>
+
+    <table class="table table-striped mt-3">
+        <tbody>
+            <tr>
+                <th scope="row">Nombre:</th>
+                <td>{{ user.name }} {{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Cédula:</th>
+                <td>{{ user.identification }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Edad:</th>
+                <td>{{ userAge }} años</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="text-center mt-4">{{ user.name }} tiene como preferencia ser enviado a los siguientes lugares listados.</p>
+    <p class="text-center">¿Quieres enviar a {{ user.name }} a uno de sus lugares de preferencia?</p>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Ubicación de Preferencia</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let place of user.favoritePlaces; index as i">
+                <td class="place-name">{{ place.name }}</td>
+                <td class="table-button">
+                    <button class="btn btn-main">Enviar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-main"
+        (click)="activeModal.close('Close click')"
+    >
+        No, enviar al destino seleccionado
+    </button>
+</div>

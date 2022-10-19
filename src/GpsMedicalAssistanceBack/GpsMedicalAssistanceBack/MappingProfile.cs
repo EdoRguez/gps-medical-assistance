@@ -13,7 +13,12 @@ namespace GpsMedicalAssistanceBack
         {
 
             // User Mapping
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>().ForMember(
+                c => c.ImagePath,
+                opt => {
+                    opt.MapFrom(x => Convert.ToBase64String(System.IO.File.ReadAllBytes(x.ImagePath)));
+                }
+            );
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
 
@@ -25,6 +30,7 @@ namespace GpsMedicalAssistanceBack
             CreateMap<FamilyType, FamilyTypeDto>();
 
             // FavoritePlace Mapping
+            CreateMap<FavoritePlace, FavoritePlaceDto>();
             CreateMap<FavoritePlaceCreateDto, FavoritePlace>();
             CreateMap<FavoritePlace, FavoritePlaceCreateDto>();
         }

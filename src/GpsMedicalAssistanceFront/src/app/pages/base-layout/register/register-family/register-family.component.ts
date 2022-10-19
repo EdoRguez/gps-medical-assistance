@@ -171,7 +171,7 @@ export class RegisterFamilyComponent implements OnInit {
     private getFamilyTypes(): void {
         this.familyTypeSvc.getFamilyTypes().pipe(
             tap(
-                (x: FamilyType[]) => {this.familyTypes = x; console.log(x)}
+                (x: FamilyType[]) => {this.familyTypes = x}
             )
         ).subscribe();
     }

@@ -22,6 +22,96 @@ namespace GpsMedicalAssistanceBack.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Entities.Models.Alert", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("CurrentLocationLatitude")
+                        .HasPrecision(12, 9)
+                        .HasColumnType("decimal(12,9)");
+
+                    b.Property<decimal>("CurrentLocationLongitude")
+                        .HasPrecision(12, 9)
+                        .HasColumnType("decimal(12,9)");
+
+                    b.Property<decimal>("DestinationLocationLatitude")
+                        .HasPrecision(12, 9)
+                        .HasColumnType("decimal(12,9)");
+
+                    b.Property<decimal>("DestinationLocationLongitude")
+                        .HasPrecision(12, 9)
+                        .HasColumnType("decimal(12,9)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Alerts");
+                });
+
+            modelBuilder.Entity("Entities.Models.AlertUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Id_Alert")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_AlertUserType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_User")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id_Alert");
+
+                    b.HasIndex("Id_AlertUserType");
+
+                    b.HasIndex("Id_User");
+
+                    b.ToTable("AlertUsers");
+                });
+
+            modelBuilder.Entity("Entities.Models.AlertUserType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AlertUserTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Creador"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Usuario en Riesgo"
+                        });
+                });
+
             modelBuilder.Entity("Entities.Models.Family", b =>
                 {
                     b.Property<int>("Id")
@@ -214,6 +304,33 @@ namespace GpsMedicalAssistanceBack.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Entities.Models.AlertUser", b =>
+                {
+                    b.HasOne("Entities.Models.Alert", "Alert")
+                        .WithMany("AlertUsers")
+                        .HasForeignKey("Id_Alert")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.AlertUserType", "AlertUserType")
+                        .WithMany()
+                        .HasForeignKey("Id_AlertUserType")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.User", "User")
+                        .WithMany("AlertUsers")
+                        .HasForeignKey("Id_User")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Alert");
+
+                    b.Navigation("AlertUserType");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Entities.Models.Family", b =>
                 {
                     b.HasOne("Entities.Models.FamilyType", "FamilyType")
@@ -244,6 +361,11 @@ namespace GpsMedicalAssistanceBack.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Entities.Models.Alert", b =>
+                {
+                    b.Navigation("AlertUsers");
+                });
+
             modelBuilder.Entity("Entities.Models.FamilyType", b =>
                 {
                     b.Navigation("Families");
@@ -251,6 +373,8 @@ namespace GpsMedicalAssistanceBack.Migrations
 
             modelBuilder.Entity("Entities.Models.User", b =>
                 {
+                    b.Navigation("AlertUsers");
+
                     b.Navigation("Families");
 
                     b.Navigation("FavoritePlaces");

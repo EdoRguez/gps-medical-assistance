@@ -1,4 +1,5 @@
 ﻿using Entities.DataTransferObjects.Family;
+using Entities.DataTransferObjects.FavoritePlace;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,5 +20,6 @@ namespace Entities.DataTransferObjects.User
         public DateTime BirthDate { get; set; }
         public string ImagePath { get; set; }
         public ICollection<FamilyDto> Families { get; set; }
+        public ICollection<FavoritePlaceDto> FavoritePlaces { get; set; }
     }
 }
