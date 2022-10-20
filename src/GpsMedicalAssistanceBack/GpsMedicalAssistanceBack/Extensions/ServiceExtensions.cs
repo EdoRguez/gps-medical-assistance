@@ -16,6 +16,7 @@ namespace GpsMedicalAssistanceBack.Extensions
                     {
                         x.MigrationsAssembly("GpsMedicalAssistanceBack");
                     });
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             });
         }
 

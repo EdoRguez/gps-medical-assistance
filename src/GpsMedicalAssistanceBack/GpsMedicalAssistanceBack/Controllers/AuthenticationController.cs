@@ -27,7 +27,7 @@ namespace GpsMedicalAssistanceBack.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AuthenticationLoginDto dto)
         {
-            var user = await _repo.AuthenticationRepository.Login(dto.Email, dto.Password);
+            var user = await _repo.Authentication.Login(dto.Email, dto.Password);
 
             if (user == null)
                 return Unauthorized();
@@ -43,7 +43,7 @@ namespace GpsMedicalAssistanceBack.Controllers
         {
             dto.User.Email = dto.User.Email.ToLower().Trim();
 
-            if (await _repo.AuthenticationRepository.UserExists(dto.User.Email))
+            if (await _repo.Authentication.UserExists(dto.User.Email))
             {
                 ModelState.AddModelError(AuthenticationSettings.FieldEmail, AuthenticationSettings.ErrorMessageUserAlreadyExists);
                 return BadRequest(ModelState);
@@ -67,7 +67,7 @@ namespace GpsMedicalAssistanceBack.Controllers
             dto.User.ImagePath = imagePath;
 
             User userToCreate = _mapper.Map<User>(dto.User);
-            var createdUser = await _repo.AuthenticationRepository.Register(userToCreate, dto.Password);
+            var createdUser = await _repo.Authentication.Register(userToCreate, dto.Password);
             await _repo.SaveAsync();
 
             var dtoUser = _mapper.Map<UserDto>(createdUser);

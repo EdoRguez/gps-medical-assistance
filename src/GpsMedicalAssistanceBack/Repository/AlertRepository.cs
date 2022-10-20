@@ -9,9 +9,14 @@ namespace Repository
     {
         public AlertRepository(ApplicationDbContext context) : base(context) { }
 
-        public void Create(Alert model)
+        public void CreateAlert(Alert model)
         {
             Create(model);
+        }
+
+        public async Task<Alert> Get(int Id, List<string> includes, bool trackChanges)
+        {
+            return await FindSingleByCondition(x => x.Id == Id, includes, trackChanges);
         }
     }
 }

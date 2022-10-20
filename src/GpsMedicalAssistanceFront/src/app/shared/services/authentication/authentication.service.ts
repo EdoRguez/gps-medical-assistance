@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { AuthenticationLogin } from 'src/app/pages/base-layout/login/interfaces/authentication-login.interface';
 import { AuthenticationRegister } from 'src/app/pages/base-layout/register/interfaces/authentication-register.interface';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,7 @@ export class AuthenticationService {
   private baseUrl: string = environment.API_URL;
 
   private isUserLoggedSubject = new BehaviorSubject<boolean>(false);
+  private getUserLogged = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) { }
 
@@ -52,5 +53,21 @@ export class AuthenticationService {
 
   get isUserLogged$(): Observable<boolean> {
     return this.isUserLoggedSubject.asObservable();
+  }
+
+  get getUserLogged$(): Observable<User | null> {
+    return this.getUserLogged.asObservable().pipe(
+      map(
+        (x: any) => {
+          let savedUser = localStorage.getItem('user');
+
+          if(!savedUser) 
+            return null
+            
+          const user: User = JSON.parse(savedUser) as User;
+          return user;
+        }
+      )
+    );
   }
 }

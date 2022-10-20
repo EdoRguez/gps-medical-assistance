@@ -4,8 +4,8 @@
     {
         IUserRepository User { get; }
         IFamilyTypeRepository FamilyType { get; }
-        IAuthenticationRepository AuthenticationRepository { get; }
-        IAlertRepository AlertRepository { get; }
+        IAuthenticationRepository Authentication { get; }
+        IAlertRepository Alert { get; }
         Task SaveAsync();
         void Rollback();
     }

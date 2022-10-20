@@ -9,6 +9,7 @@ namespace Interfaces
 {
     public interface IAlertRepository
     {
-        void Create(Alert model);
+        void CreateAlert(Alert model);
+        Task<Alert> Get(int Id, List<string> includes, bool trackChanges);
     }
 }

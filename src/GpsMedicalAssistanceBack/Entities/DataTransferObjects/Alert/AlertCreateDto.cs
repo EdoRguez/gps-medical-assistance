@@ -25,6 +25,6 @@ namespace Entities.DataTransferObjects.Alert
 
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        public ICollection<AlertUserDto> AlertUsers { get; set; }
+        public ICollection<AlertUserCreateDto> AlertUsers { get; set; }
     }
 }

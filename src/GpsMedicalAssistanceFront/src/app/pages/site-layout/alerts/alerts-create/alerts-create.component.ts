@@ -18,6 +18,11 @@ import { UserService } from 'src/app/shared/services/user/user.service';
 import { UserParameters } from 'src/app/shared/services/request-features/user-parameters.interface';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { ModalAlertUserComponent } from 'src/app/pages/site-layout/alerts/alerts-create/modal-alert-user/modal-alert-user.component';
+import { AlertCreate } from '../interfaces/alert-create.interface';
+import { AlertUserCreate } from '../interfaces/alert-user-create.interface';
+import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
+import { AlertService } from '../services/alert.service';
+import { Alert } from '../interfaces/alert.interface';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -52,21 +57,10 @@ export class AlertsCreateComponent implements OnInit {
         private _mapSearchLocationSvc: MapSearchLocationService,
         private loaderSvc: LoaderService,
         private modalService: NgbModal,
-        private userSvc: UserService
+        private userSvc: UserService,
+        private authSvc: AuthenticationService,
+        private alertSvc: AlertService
     ) {
-        // navigator.geolocation.getCurrentPosition(
-        //     (result: GeolocationPosition) => {
-        //         this.isMapLoading = false;
-        //         this.lat = result.coords.latitude;
-        //         this.lon = result.coords.longitude;
-        //         this.zoom = 17;
-        //         this.initMap();
-        //     },
-        //     (error) => {
-        //         console.log(error);
-        //         alert('Hubo un error al obtener tu ubicacón, refresca la página');
-        //     }
-        // );
     }
 
     ngOnInit(): void {
@@ -76,30 +70,6 @@ export class AlertsCreateComponent implements OnInit {
         this.zoom = 17;
 
         this.initMap();
-
-        // const params: UserParameters = {
-        //     identificationType: 'V',
-        //     identification: '27246754',
-        //     includes: ['FavoritePlaces'],
-        // };
-
-        // this.userSvc.getAll(params).subscribe((users: User[]) => {
-        //     if (users) {
-        //         console.log(users[0]);
-        //         this.isPageLoading = false;
-        //         this.loaderSvc.toggleLoader(false);
-
-        //         const modalAlertUserRef = this.modalService.open(
-        //             ModalAlertUserComponent,
-        //             {
-        //                 backdrop: 'static',
-        //                 keyboard: false,
-        //                 size: 'lg'
-        //             }
-        //         );
-        //         modalAlertUserRef.componentInstance.user = users[0];
-        //     }
-        // });
     }
 
     onSubmitForm(): void {
@@ -118,7 +88,6 @@ export class AlertsCreateComponent implements OnInit {
 
             this.userSvc.getAll(params).subscribe((users: User[]) => {
                 if (users) {
-                    console.log(users[0]);
                     this.isPageLoading = false;
                     this.loaderSvc.toggleLoader(false);
 
@@ -127,13 +96,73 @@ export class AlertsCreateComponent implements OnInit {
                         {
                             backdrop: 'static',
                             keyboard: false,
-                            size: 'lg'
+                            size: 'lg',
                         }
                     );
                     modalAlertUserRef.componentInstance.user = users[0];
+
+                    modalAlertUserRef.result.then(
+                        (idPlace: number) => {
+                            if (idPlace) {
+                                const destinationLocation =
+                                    users[0].favoritePlaces.find(
+                                        (x) => x.id === idPlace
+                                    );
+                                if (destinationLocation) {
+                                    const alertCreate: AlertCreate = {
+                                        currentLocationLatitude: this.lat,
+                                        currentLocationLongitude: this.lon,
+                                        destinationLocationLatitude:
+                                            destinationLocation.latitude,
+                                        destinationLocationLongitude:
+                                            destinationLocation.longitude,
+                                        alertUsers: this.buildAlertUserCreate(
+                                            users[0]
+                                        ),
+                                    };
+
+                                    console.log(alertCreate);
+
+                                    this.alertSvc.create(alertCreate).subscribe(
+                                        (x: Alert) => {
+                                            console.log('check returned');
+                                            console.log(x);
+                                        },
+                                        err => {
+                                            console.log('err');
+                                            console.log(err);
+                                        }
+                                    );
+                                }
+                            }
+                        },
+                        () => {}
+                    );
                 }
             });
         }
+    }
+
+    private buildAlertUserCreate(userToHelp: User): AlertUserCreate[] {
+        let alertUserCreate: AlertUserCreate[] = [
+            {
+                id_User: userToHelp.id,
+                id_AlertUserType: 1,
+            },
+        ];
+
+        this.authSvc.getUserLogged$.subscribe({
+            next: (user: User | null) => {
+                if (user) {
+                    alertUserCreate.push({
+                        id_User: user.id,
+                        id_AlertUserType: 2,
+                    });
+                }
+            },
+        });
+        
+        return alertUserCreate;
     }
 
     private initMap(): void {

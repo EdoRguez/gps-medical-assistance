@@ -39,7 +39,7 @@
             <tr *ngFor="let place of user.favoritePlaces; index as i">
                 <td class="place-name">{{ place.name }}</td>
                 <td class="table-button">
-                    <button class="btn btn-main">Enviar</button>
+                    <button class="btn btn-main" (click)="activeModal.close(place.id)">Enviar</button>
                 </td>
             </tr>
         </tbody>

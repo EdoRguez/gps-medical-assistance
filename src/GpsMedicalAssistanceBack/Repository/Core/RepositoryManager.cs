@@ -40,7 +40,7 @@ namespace Repository.Core
             }
         }
 
-        public IAuthenticationRepository AuthenticationRepository
+        public IAuthenticationRepository Authentication
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Repository.Core
             }
         }
 
-        public IAlertRepository AlertRepository
+        public IAlertRepository Alert
         {
             get
             {
