@@ -11,6 +11,7 @@ namespace Repository.Core
         private IUserRepository _userRepository;
         private IFamilyTypeRepository _familyTypeRepository;
         private IAuthenticationRepository _authenticationRepository;
+        private IAlertRepository _alertRepository;
 
         public RepositoryManager(ApplicationDbContext context)
         {
@@ -47,6 +48,17 @@ namespace Repository.Core
                     _authenticationRepository = new AuthenticationRepository(_context);
 
                 return _authenticationRepository;
+            }
+        }
+
+        public IAlertRepository AlertRepository
+        {
+            get
+            {
+                if (_alertRepository == null)
+                    _alertRepository = new AlertRepository(_context);
+
+                return _alertRepository;
             }
         }
 

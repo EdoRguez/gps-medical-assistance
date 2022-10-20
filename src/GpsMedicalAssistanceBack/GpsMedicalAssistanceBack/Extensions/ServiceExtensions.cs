@@ -11,7 +11,7 @@ namespace GpsMedicalAssistanceBack.Extensions
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                     x =>
                     {
                         x.MigrationsAssembly("GpsMedicalAssistanceBack");

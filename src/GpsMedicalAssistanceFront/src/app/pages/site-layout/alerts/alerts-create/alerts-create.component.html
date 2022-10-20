@@ -29,7 +29,6 @@
                         type="text"
                         class="form-control form-control-sm"
                         [class.is-invalid]="searchFailedTextField"
-                        [(ngModel)]="model"
                         [ngbTypeahead]="search"
                         [resultFormatter]="formatter"
                         [inputFormatter]="formatter"

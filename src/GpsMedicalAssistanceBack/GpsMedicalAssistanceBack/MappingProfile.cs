@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Entities.DataTransferObjects.Alert;
+using Entities.DataTransferObjects.AlertUser;
 using Entities.DataTransferObjects.Family;
 using Entities.DataTransferObjects.FamilyType;
 using Entities.DataTransferObjects.FavoritePlace;
@@ -11,7 +13,6 @@ namespace GpsMedicalAssistanceBack
     {
         public MappingProfile()
         {
-
             // User Mapping
             CreateMap<User, UserDto>().ForMember(
                 c => c.ImagePath,
@@ -33,6 +34,14 @@ namespace GpsMedicalAssistanceBack
             CreateMap<FavoritePlace, FavoritePlaceDto>();
             CreateMap<FavoritePlaceCreateDto, FavoritePlace>();
             CreateMap<FavoritePlace, FavoritePlaceCreateDto>();
+
+            // Alert Mapping
+            CreateMap<Alert, AlertDto>();
+            CreateMap<AlertCreateDto, Alert>();
+
+            // AlertUser Mapping
+            CreateMap<AlertUser, AlertUserDto>();
+            CreateMap<AlertUserCreateDto, AlertUser>();
         }
     }
 }

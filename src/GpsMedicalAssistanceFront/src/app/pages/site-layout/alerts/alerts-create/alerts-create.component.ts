@@ -40,7 +40,6 @@ export class AlertsCreateComponent implements OnInit {
         identification: new FormControl(null, [Validators.required]),
     });
 
-    model: any;
     searchingTextField = false;
     searchFailedTextField = false;
 
@@ -78,29 +77,29 @@ export class AlertsCreateComponent implements OnInit {
 
         this.initMap();
 
-        const params: UserParameters = {
-            identificationType: 'V',
-            identification: '27246754',
-            includes: ['FavoritePlaces'],
-        };
+        // const params: UserParameters = {
+        //     identificationType: 'V',
+        //     identification: '27246754',
+        //     includes: ['FavoritePlaces'],
+        // };
 
-        this.userSvc.getAll(params).subscribe((users: User[]) => {
-            if (users) {
-                console.log(users[0]);
-                this.isPageLoading = false;
-                this.loaderSvc.toggleLoader(false);
+        // this.userSvc.getAll(params).subscribe((users: User[]) => {
+        //     if (users) {
+        //         console.log(users[0]);
+        //         this.isPageLoading = false;
+        //         this.loaderSvc.toggleLoader(false);
 
-                const modalAlertUserRef = this.modalService.open(
-                    ModalAlertUserComponent,
-                    {
-                        backdrop: 'static',
-                        keyboard: false,
-                        size: 'lg'
-                    }
-                );
-                modalAlertUserRef.componentInstance.user = users[0];
-            }
-        });
+        //         const modalAlertUserRef = this.modalService.open(
+        //             ModalAlertUserComponent,
+        //             {
+        //                 backdrop: 'static',
+        //                 keyboard: false,
+        //                 size: 'lg'
+        //             }
+        //         );
+        //         modalAlertUserRef.componentInstance.user = users[0];
+        //     }
+        // });
     }
 
     onSubmitForm(): void {
