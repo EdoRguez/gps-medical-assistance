@@ -15,6 +15,6 @@ export class AlertService {
   constructor(private _http: HttpClient) { }
 
   create(model: AlertCreate): Observable<Alert> {
-    return this._http.post<AlertCreate>(`${this.baseUrl}/Alert`, model);
+    return this._http.post<Alert>(`${this.baseUrl}/Alert`, model);
   }
 }

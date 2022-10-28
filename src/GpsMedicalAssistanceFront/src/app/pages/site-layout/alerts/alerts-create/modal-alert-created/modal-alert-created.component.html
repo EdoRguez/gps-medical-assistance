@@ -1,0 +1,22 @@
+<div class="modal-header d-flex justify-content-center">
+    <h4 class="modal-title" ngbAutofocus>Alerta Creada</h4>
+</div>
+<div class="modal-body">
+    <p class="text-center">¡Gracias por la alerta!</p>
+
+    <div class="d-flex justify-content-center">    
+        <img class="img-fluid alert-icon" src="assets/icons/alert_icon.png" >
+    </div>
+
+    <p class="text-center mt-2">La alerta fue creada y los familiares serán notificados inmediatamente</p>
+
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-main"
+        (click)="activeModal.close('Close click')"
+    >
+        Ver Alerta
+    </button>
+</div>

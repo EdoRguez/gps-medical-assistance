@@ -17,9 +17,14 @@ namespace Repository
             Create(model);
         }
 
-        public async Task<User> GetUser(int id, List<string> includes, bool trackChanges)
+        public async Task<User> GetUser(int id, List<IncludesGeneral> includes, bool trackChanges)
         {
             return await FindSingleByCondition(x => x.Id.Equals(id), includes, trackChanges);
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsers(bool trackChanges)
+        {
+            return await FindAll(trackChanges).ToListAsync();
         }
 
         public async Task<IEnumerable<User>> GetAllUsers(UserParameters userParameters, bool trackChanges)

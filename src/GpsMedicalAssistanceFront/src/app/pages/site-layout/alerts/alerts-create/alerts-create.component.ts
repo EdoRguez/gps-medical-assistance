@@ -23,6 +23,7 @@ import { AlertUserCreate } from '../interfaces/alert-user-create.interface';
 import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
 import { AlertService } from '../services/alert.service';
 import { Alert } from '../interfaces/alert.interface';
+import { ModalAlertCreatedComponent } from './modal-alert-created/modal-alert-created.component';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -83,10 +84,13 @@ export class AlertsCreateComponent implements OnInit {
                 identificationType:
                     this.form.controls['identificationType'].value,
                 identification: this.form.controls['identification'].value,
-                includes: ['FavoritePlaces'],
+                includes: [{
+                    name: 'FavoritePlaces',
+                    children: [] 
+                }] 
             };
 
-            this.userSvc.getAll(params).subscribe((users: User[]) => {
+            this.userSvc.getAllFilter(params).subscribe((users: User[]) => {
                 if (users) {
                     this.isPageLoading = false;
                     this.loaderSvc.toggleLoader(false);
@@ -125,6 +129,14 @@ export class AlertsCreateComponent implements OnInit {
 
                                     this.alertSvc.create(alertCreate).subscribe(
                                         (x: Alert) => {
+                                            const modalAlertCreatedRef = this.modalService.open(
+                                                ModalAlertCreatedComponent,
+                                                {
+                                                    backdrop: 'static',
+                                                    keyboard: false
+                                                }
+                                            );
+                                            modalAlertCreatedRef.componentInstance.idAlert = x.id;
                                             console.log('check returned');
                                             console.log(x);
                                         },

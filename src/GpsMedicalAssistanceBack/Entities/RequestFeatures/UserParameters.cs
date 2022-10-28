@@ -10,6 +10,6 @@ namespace Entities.RequestFeatures
     {
         public char? Identificationtype { get; set; }
         public string? Identification { get; set; }
-        public List<string>? Includes { get; set; }
+        public List<IncludesGeneral> Includes { get; set; } = new List<IncludesGeneral>();
     }
 }

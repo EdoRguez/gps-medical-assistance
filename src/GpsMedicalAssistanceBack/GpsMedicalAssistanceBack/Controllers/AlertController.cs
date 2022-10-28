@@ -2,6 +2,7 @@
 using Entities.DataTransferObjects.Alert;
 using Entities.DataTransferObjects.User;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Interfaces.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,14 +25,21 @@ namespace GpsMedicalAssistanceBack.Controllers
         [HttpGet("{id}", Name = "GetAlert")]
         public async Task<IActionResult> GetAlert(int id)
         {
-            List<string> includes = new List<string>()
+            List<IncludesGeneral> includes = new()
             {
-                "AlertUser"
+                new IncludesGeneral()
+                {
+                    Name = "AlertUsers",
+                    Children =  new List<IncludesGeneral>()
+                    {
+                        new IncludesGeneral() { Name = "User" }
+                    }
+                }
             };
 
-            var user = await _repo.User.GetUser(id, includes, false);
+            var alert = await _repo.Alert.Get(id, includes, false);
 
-            var dto = _mapper.Map<UserDto>(user);
+            var dto = _mapper.Map<AlertDto>(alert);
 
             return Ok(dto);
         }
@@ -46,7 +54,7 @@ namespace GpsMedicalAssistanceBack.Controllers
 
             var returnAlert = _mapper.Map<AlertDto>(model);
 
-            return CreatedAtRoute("GetAlert", new { id = returnAlert.Id }, returnAlert);
+            return CreatedAtRoute(nameof(GetAlert), new { id = returnAlert.Id }, returnAlert);
         }
     }
 }

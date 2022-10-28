@@ -20,23 +20,29 @@ namespace GpsMedicalAssistanceBack.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<UserController>
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] UserParameters userParameters)
+        public async Task<IActionResult> GetAll()
+        {
+            var users = await _repo.User.GetAllUsers(false);
+            var dto = _mapper.Map<IEnumerable<UserDto>>(users);
+            return Ok(dto);
+        }
+
+        [HttpPost("Filter")]
+        public async Task<IActionResult> GetAll([FromBody] UserParameters userParameters)
         {
             var users = await _repo.User.GetAllUsers(userParameters, false);
             var dto = _mapper.Map<IEnumerable<UserDto>>(users);
             return Ok(dto);
         }
 
-        // GET api/<UserController>/5
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            List<string> includes = new List<string>
+            List<IncludesGeneral> includes = new List<IncludesGeneral>()
             {
-                "Families",
-                "FavoritePlaces"
+                new IncludesGeneral(){ Name = "Families" },
+                new IncludesGeneral(){ Name = "FavoritePlaces" }
             };
 
             var user = await _repo.User.GetUser(id, includes, false);
@@ -46,7 +52,6 @@ namespace GpsMedicalAssistanceBack.Controllers
             return Ok(dto);
         }
 
-        // POST api/<UserController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] UserCreateDto dto)
         {
@@ -60,7 +65,6 @@ namespace GpsMedicalAssistanceBack.Controllers
             return CreatedAtRoute("GetUser", new { id = returnUser.Id }, returnUser);
         }
 
-        // PUT api/<UserController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

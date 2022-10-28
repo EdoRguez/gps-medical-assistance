@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Entities.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Interfaces
     public interface IAlertRepository
     {
         void CreateAlert(Alert model);
-        Task<Alert> Get(int Id, List<string> includes, bool trackChanges);
+        Task<Alert> Get(int Id, List<IncludesGeneral>? includes, bool trackChanges);
     }
 }

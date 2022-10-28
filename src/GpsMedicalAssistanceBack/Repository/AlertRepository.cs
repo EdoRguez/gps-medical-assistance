@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Interfaces;
 using Repository.Core;
 
@@ -14,7 +15,7 @@ namespace Repository
             Create(model);
         }
 
-        public async Task<Alert> Get(int Id, List<string> includes, bool trackChanges)
+        public async Task<Alert> Get(int Id, List<IncludesGeneral> includes, bool trackChanges)
         {
             return await FindSingleByCondition(x => x.Id == Id, includes, trackChanges);
         }

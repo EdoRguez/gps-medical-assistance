@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.RequestFeatures;
 using Interfaces.Core;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -37,14 +38,11 @@ namespace Repository.Core
             return await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(expression);
         }
 
-        public async Task<T> FindSingleByCondition(Expression<Func<T, bool>> expression, List<string> includes, bool trackChanges)
+        public async Task<T> FindSingleByCondition(Expression<Func<T, bool>> expression, List<IncludesGeneral> includes, bool trackChanges)
         {
             var query = _context.Set<T>().AsQueryable();
 
-            foreach (string include in includes)
-            {
-                query = query.Include(include);
-            }
+            ManageIncludes(ref query, includes, string.Empty);
 
             if (trackChanges)
                 return await query.SingleOrDefaultAsync(expression);
@@ -60,14 +58,11 @@ namespace Repository.Core
             return _context.Set<T>().AsNoTracking();
         }
 
-        public IQueryable<T> FindAll(List<string> includes, bool trackChanges)
+        public IQueryable<T> FindAll(List<IncludesGeneral> includes, bool trackChanges)
         {
             var query = _context.Set<T>().AsQueryable();
 
-            foreach(string include in includes)
-            {
-                query = query.Include(include);
-            }
+            ManageIncludes(ref query, includes, string.Empty);
 
             if (trackChanges)
                 return query;
@@ -83,14 +78,11 @@ namespace Repository.Core
             return _context.Set<T>().Where(expression).AsNoTracking();
         }
 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, List<string> includes, bool trackChanges)
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, List<IncludesGeneral> includes, bool trackChanges)
         {
             var query = _context.Set<T>().AsQueryable();
 
-            foreach (string include in includes)
-            {
-                query = query.Include(include);
-            }
+            ManageIncludes(ref query, includes, string.Empty);
 
             if (trackChanges)
                 return query.Where(expression);
@@ -108,6 +100,19 @@ namespace Repository.Core
             var validIds = await _context.Set<T>().Select(expression).ToListAsync();
 
             return ids.All(x => validIds.Contains(x));
+        }
+
+        public void ManageIncludes(ref IQueryable<T> query, List<IncludesGeneral> includes, string includeQuery)
+        {
+            foreach (var item in includes)
+            {
+                includeQuery = String.IsNullOrEmpty(includeQuery) ? item.Name : $"{includeQuery}.{item.Name}";
+                
+                if (item.Children.Count > 0)
+                    ManageIncludes(ref query, item.Children, includeQuery);
+                else
+                    query = query.Include(includeQuery);
+            }
         }
     }
 }

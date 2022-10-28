@@ -15,6 +15,8 @@ import { AlertsCreateComponent } from './alerts-create/alerts-create.component';
 import { RouterModule } from '@angular/router';
 import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 import { ModalAlertUserComponent } from './alerts-create/modal-alert-user/modal-alert-user.component';
+import { ModalAlertCreatedComponent } from './alerts-create/modal-alert-created/modal-alert-created.component';
+import { AlertDetailsComponent } from './alert-details/alert-details.component';
 
 registerLocaleData(localeEs, 'es', localeEsExtra);
 
@@ -24,7 +26,9 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
     AlertsFilterComponent,
     AlertsListComponent,
     AlertsCreateComponent,
-    ModalAlertUserComponent
+    ModalAlertUserComponent,
+    ModalAlertCreatedComponent,
+    AlertDetailsComponent
   ],
   imports: [
     CommonModule,
