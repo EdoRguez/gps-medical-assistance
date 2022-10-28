@@ -1,17 +1,34 @@
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\bin\Debug\net6.0\Repository.deps.json
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\bin\Debug\net6.0\Repository.dll
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\bin\Debug\net6.0\Repository.pdb
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.csproj.AssemblyReference.cache
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.AssemblyInfoInputs.cache
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.AssemblyInfo.cs
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.csproj.CoreCompileInputs.cache
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.dll
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\refint\Repository.dll
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.pdb
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\ref\Repository.dll
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\bin\Debug\net6.0\Entities.dll
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\bin\Debug\net6.0\Interfaces.dll
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\bin\Debug\net6.0\Interfaces.pdb
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\bin\Debug\net6.0\Entities.pdb
-C:\Users\User\Documents\USM\Proyecto de Grado 1 y 2\Proyecto\GpsMedicalAssistance\src\GpsMedicalAssistanceBack\Repository\obj\Debug\net6.0\Repository.csproj.CopyComplete
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Repository.deps.json
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Repository.dll
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Repository.pdb
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.csproj.AssemblyReference.cache
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.AssemblyInfoInputs.cache
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.AssemblyInfo.cs
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.csproj.CoreCompileInputs.cache
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.dll
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/refint/Repository.dll
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.pdb
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/ref/Repository.dll
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Entities.dll
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Interfaces.dll
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Interfaces.pdb
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Entities.pdb
+C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.csproj.CopyComplete
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Repository.deps.json
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Repository.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Repository.pdb
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Entities.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Interfaces.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Interfaces.pdb
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/bin/Debug/net6.0/Entities.pdb
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.csproj.AssemblyReference.cache
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.AssemblyInfoInputs.cache
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.AssemblyInfo.cs
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.csproj.CoreCompileInputs.cache
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.csproj.CopyComplete
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/refint/Repository.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/Repository.pdb
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/Debug/net6.0/ref/Repository.dll

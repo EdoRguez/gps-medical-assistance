@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,13 +12,15 @@ export class ModalAlertCreatedComponent implements OnInit {
   @Input() idAlert!: number;
 
   constructor(public activeModal: NgbActiveModal,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   goToCreatedAlert(): void {
-    this.router.navigate([]);
+    this.activeModal.dismiss();
+    this.router.navigateByUrl(`/alerts/${this.idAlert}`);
   }
 
 }

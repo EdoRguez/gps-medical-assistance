@@ -6,8 +6,8 @@ import { AlertsComponent } from './alerts.component';
 
 const routes: Routes = [
   { path: '', component: AlertsComponent },
-  { path: ':id', component: AlertDetailsComponent },
-  { path: 'create', component: AlertsCreateComponent }
+  { path: 'create', component: AlertsCreateComponent },
+  { path: ':id', component: AlertDetailsComponent }
 ];
 
 @NgModule({

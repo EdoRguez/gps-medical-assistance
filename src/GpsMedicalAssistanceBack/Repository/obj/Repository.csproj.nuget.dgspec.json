@@ -1,30 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Repository\\Repository.csproj": {}
+    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Entities\\Entities.csproj": {
+    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Entities\\Entities.csproj",
+        "projectUniqueName": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Entities\\obj\\",
+        "projectPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/Entities.csproj",
+        "packagesPath": "/Users/pc/.nuget/packages/",
+        "outputPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/pc/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -74,39 +69,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Interfaces\\Interfaces.csproj": {
+    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Interfaces/Interfaces.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Interfaces\\Interfaces.csproj",
+        "projectUniqueName": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Interfaces/Interfaces.csproj",
         "projectName": "Interfaces",
-        "projectPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Interfaces\\Interfaces.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Interfaces\\obj\\",
+        "projectPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Interfaces/Interfaces.csproj",
+        "packagesPath": "/Users/pc/.nuget/packages/",
+        "outputPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Interfaces/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/pc/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Entities\\Entities.csproj"
+              "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/Entities.csproj": {
+                "projectPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/Entities.csproj"
               }
             }
           }
@@ -136,39 +126,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Repository\\Repository.csproj": {
+    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Repository\\Repository.csproj",
+        "projectUniqueName": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Repository\\obj\\",
+        "projectPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/Repository.csproj",
+        "packagesPath": "/Users/pc/.nuget/packages/",
+        "outputPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/pc/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Interfaces\\Interfaces.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\USM\\Proyecto de Grado 1 y 2\\Proyecto\\GpsMedicalAssistance\\src\\GpsMedicalAssistanceBack\\Interfaces\\Interfaces.csproj"
+              "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Interfaces/Interfaces.csproj": {
+                "projectPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Interfaces/Interfaces.csproj"
               }
             }
           }
@@ -198,7 +183,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
         }
       }
     }
