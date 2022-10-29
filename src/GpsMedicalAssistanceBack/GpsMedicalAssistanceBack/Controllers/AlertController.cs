@@ -22,6 +22,16 @@ namespace GpsMedicalAssistanceBack.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost("Filter")]
+        public async Task<IActionResult> GetAll([FromBody] AlertParameters parameters)
+        {
+            var alerts = await _repo.Alert.GetAll(parameters.Includes, false);
+
+            var dto = _mapper.Map<IEnumerable<AlertDto>>(alerts);
+
+            return Ok(dto);
+        }
+
         [HttpGet("{id}", Name = "GetAlert")]
         public async Task<IActionResult> GetAlert(int id)
         {

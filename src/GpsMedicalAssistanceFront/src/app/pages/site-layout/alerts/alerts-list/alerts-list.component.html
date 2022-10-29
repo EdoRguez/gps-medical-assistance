@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 alert-box" *ngFor="let alert of alertsList">
             <div class="d-flex flex-column align-items-center my-3">
-                <img class="img-fluid profile-img" [src]="alert.imageUrl" >
-                <span class="alert-name">{{ alert.name }} {{alert.lastName}}</span>
-                <span class="alert-identification">{{ alert.identification }}</span>
-                <span class="alert-date">{{ alert.creationDate }}</span>
+                <img class="img-fluid profile-img" [src]="'data:image/jpeg;base64,' + alert.alertUsers[0].user.imagePath" >
+                <span class="alert-name">{{ alert.alertUsers[0].user.name }} {{alert.alertUsers[0].user.lastName}}</span>
+                <span class="alert-identification">{{ alert.alertUsers[0].user.identification }}</span>
+                <span class="alert-date">{{ alert.creationDate | date: 'dd/MM/yyyy - h:mm a' }}</span>
             </div>
         </div>
     </div>

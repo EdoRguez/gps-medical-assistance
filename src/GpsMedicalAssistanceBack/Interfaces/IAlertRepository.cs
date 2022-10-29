@@ -11,6 +11,7 @@ namespace Interfaces
     public interface IAlertRepository
     {
         void CreateAlert(Alert model);
-        Task<Alert> Get(int Id, List<IncludesGeneral>? includes, bool trackChanges);
+        Task<IEnumerable<Alert>> GetAll(List<IncludesGeneral> includes, bool trackChanges);
+        Task<Alert> Get(int Id, List<IncludesGeneral> includes, bool trackChanges);
     }
 }
