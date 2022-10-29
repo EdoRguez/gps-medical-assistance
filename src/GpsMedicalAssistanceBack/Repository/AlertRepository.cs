@@ -2,6 +2,7 @@
 using Entities.Models;
 using Entities.RequestFeatures;
 using Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Repository.Core;
 
 namespace Repository
@@ -13,6 +14,11 @@ namespace Repository
         public void CreateAlert(Alert model)
         {
             Create(model);
+        }
+
+        public async Task<IEnumerable<Alert>> GetAll(List<IncludesGeneral> includes, bool trackChanges)
+        {
+            return await FindAll(includes, trackChanges).ToListAsync();
         }
 
         public async Task<Alert> Get(int Id, List<IncludesGeneral> includes, bool trackChanges)
