@@ -1,0 +1,33 @@
+<div class="h-25" *ngIf="!lastMovements">
+    <app-loader></app-loader>
+</div>
+<table class="table table-striped" *ngIf="lastMovements">
+    <thead>
+        <tr>
+            <th scope="col">Estado</th>
+            <th scope="col">Lugar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="text-center">
+                <span class="badge rounded-pill text-dark bg-warning"
+                    >Accidente</span
+                >
+            </td>
+            <td>
+                {{ lastMovements.currentLocation.description }}
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">
+                <span class="badge rounded-pill bg-success text-dark pulsate"
+                    >Destino</span
+                >
+            </td>
+            <td>
+                {{ lastMovements.destinationLocation.description }}
+            </td>
+        </tr>
+    </tbody>
+</table>

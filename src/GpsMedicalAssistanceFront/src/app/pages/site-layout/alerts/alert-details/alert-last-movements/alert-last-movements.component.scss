@@ -1,0 +1,24 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.table {
+    border: 1.5px solid #cccccc;
+}
+
+.pulsate {
+    animation: pulsate 3s ease-out infinite;
+    opacity: 0.5;
+}
+
+@keyframes pulsate {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

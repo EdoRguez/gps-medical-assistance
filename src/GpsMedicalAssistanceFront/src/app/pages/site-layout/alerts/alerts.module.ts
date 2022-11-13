@@ -17,6 +17,10 @@ import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 import { ModalAlertUserComponent } from './alerts-create/modal-alert-user/modal-alert-user.component';
 import { ModalAlertCreatedComponent } from './alerts-create/modal-alert-created/modal-alert-created.component';
 import { AlertDetailsComponent } from './alert-details/alert-details.component';
+import { AlertUserComponent } from './alert-details/alert-user/alert-user.component';
+import { AlertLastMovementsComponent } from './alert-details/alert-last-movements/alert-last-movements.component';
+import { AlertMapComponent } from './alert-details/alert-map/alert-map.component';
+import { GlobalPipesModule } from 'src/app/shared/pipes/global-pipes.module';
 
 registerLocaleData(localeEs, 'es', localeEsExtra);
 
@@ -28,7 +32,10 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
     AlertsCreateComponent,
     ModalAlertUserComponent,
     ModalAlertCreatedComponent,
-    AlertDetailsComponent
+    AlertDetailsComponent,
+    AlertUserComponent,
+    AlertLastMovementsComponent,
+    AlertMapComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +44,8 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    LoaderModule
+    LoaderModule,
+    GlobalPipesModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'es-ES' }],
 })

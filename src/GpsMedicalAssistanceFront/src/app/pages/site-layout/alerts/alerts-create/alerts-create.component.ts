@@ -86,8 +86,8 @@ export class AlertsCreateComponent implements OnInit {
                 identification: this.form.controls['identification'].value,
                 includes: [{
                     name: 'FavoritePlaces',
-                    children: [] 
-                }] 
+                    children: []
+                }]
             };
 
             this.userSvc.getAllFilter(params).subscribe((users: User[]) => {
@@ -159,7 +159,7 @@ export class AlertsCreateComponent implements OnInit {
         let alertUserCreate: AlertUserCreate[] = [
             {
                 id_User: userToHelp.id,
-                id_AlertUserType: 1,
+                id_AlertUserType: 2,
             },
         ];
 
@@ -168,12 +168,12 @@ export class AlertsCreateComponent implements OnInit {
                 if (user) {
                     alertUserCreate.push({
                         id_User: user.id,
-                        id_AlertUserType: 2,
+                        id_AlertUserType: 1,
                     });
                 }
             },
         });
-        
+
         return alertUserCreate;
     }
 

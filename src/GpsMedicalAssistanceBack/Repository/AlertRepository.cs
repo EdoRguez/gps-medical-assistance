@@ -4,6 +4,7 @@ using Entities.RequestFeatures;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Repository.Core;
+using Repository.Extensions;
 
 namespace Repository
 {
@@ -16,9 +17,9 @@ namespace Repository
             Create(model);
         }
 
-        public async Task<IEnumerable<Alert>> GetAll(List<IncludesGeneral> includes, bool trackChanges)
+        public async Task<IEnumerable<Alert>> GetAll(AlertParameters parameters, bool trackChanges)
         {
-            return await FindAll(includes, trackChanges).ToListAsync();
+            return await FindAll(parameters.Includes, trackChanges).Filter(parameters).SortBy(parameters).ToListAsync();
         }
 
         public async Task<Alert> Get(int Id, List<IncludesGeneral> includes, bool trackChanges)

@@ -46,7 +46,7 @@ const routes: Routes = [
         ],
         canActivate: [IsAuthenticatedGuard]
     },
-    // { path: '**', pathMatch: 'full', redirectTo: '' },
+    { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
 
 @NgModule({

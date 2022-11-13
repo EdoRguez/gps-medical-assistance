@@ -16,8 +16,8 @@ namespace Repository.Extensions
                 return users;
 
 
-            return users.Where(x => 
-                                    x.Identification.Contains(userParameters.Identificationtype.ToString()) && 
+            return users.Where(x =>
+                                    x.Identification.Contains(userParameters.Identificationtype.ToString()) &&
                                     x.Identification.Contains(userParameters.Identification
             ));
         }

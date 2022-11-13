@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../interfaces/user.interface';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 @Component({
@@ -10,6 +11,7 @@ export class HeaderComponent implements OnInit {
 
   toggleNavbar: boolean = true;
   isUserLogged: boolean = false;
+  user!: User | null;
 
   constructor(private authSvc: AuthenticationService) { }
 
@@ -18,6 +20,12 @@ export class HeaderComponent implements OnInit {
       next: (value: boolean) => {
         this.isUserLogged = value;
       }
+    });
+
+    this.authSvc.getUserLogged$.subscribe({
+        next: (user: User | null) => {
+            this.user = user;
+        }
     });
   }
 
