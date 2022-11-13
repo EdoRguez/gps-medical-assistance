@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MapSearchLocation } from '../../interfaces/mapSearchLocation.interface';
 
@@ -22,9 +22,25 @@ export class MapSearchLocationService {
                 .set('format', 'json')
                 .set('limit', 5)
                 .set('countrycodes', 'VE')
-                .set('state', 'caracas')
+                .set('state', 'caracas'),
         };
 
         return this._http.get<MapSearchLocation[]>(`${this.baseUrl}`, options);
+    }
+
+    searchLocationByCoordinates(
+        lat: number,
+        lon: number
+    ): Observable<MapSearchLocation> {
+        const options = {
+            params: new HttpParams()
+                .set('q', `${lat},${lon}`)
+                .set('polygon_geojson', 1)
+                .set('format', 'json'),
+        };
+
+        return this._http
+            .get<MapSearchLocation[]>(`${this.baseUrl}`, options)
+            .pipe(map((x: MapSearchLocation[]) => x[0]));
     }
 }

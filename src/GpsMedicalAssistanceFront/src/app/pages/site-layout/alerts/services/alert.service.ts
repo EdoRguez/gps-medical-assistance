@@ -15,6 +15,10 @@ export class AlertService {
 
   constructor(private _http: HttpClient) { }
 
+  get(id: number): Observable<Alert> {
+    return this._http.get<Alert>(`${this.baseUrl}/Alert/${id}`);
+  }
+
   getAllFilter(parameters: AlertParameters): Observable<Alert[]> {
     return this._http.post<Alert[]>(`${this.baseUrl}/Alert/Filter`, parameters);
   }

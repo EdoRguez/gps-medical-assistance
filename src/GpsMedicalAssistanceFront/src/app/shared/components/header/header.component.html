@@ -47,18 +47,17 @@
                 <li class="nav-item mx-3" *ngIf="isUserLogged">
                     <a
                         class="nav-link hover-link"
-                        [routerLink]="['account']"
-                        [routerLinkActive]="['active-route']"
-                        >Cuenta</a
-                    >
-                </li>
-                <li class="nav-item mx-3" *ngIf="isUserLogged">
-                    <a
-                        class="nav-link hover-link"
                         (click)="onLogout()"
                         >Cerrar Sesión</a
                     >
                 </li>
+                <li class="nav-item mx-3" *ngIf="isUserLogged && user">
+                    <a
+                        class="nav-link no-hover-link"
+                        >¡Hola, {{ user.name }}!</a
+                    >
+                </li>
+
                 <li class="nav-item mx-3">
                     <div class="nav-link nav-person-box" [routerLink]="['alerts']">
                         <span class="nav-person-text">Alertas</span>

@@ -61,9 +61,9 @@ export class AuthenticationService {
         (x: any) => {
           let savedUser = localStorage.getItem('user');
 
-          if(!savedUser) 
+          if(!savedUser)
             return null
-            
+
           const user: User = JSON.parse(savedUser) as User;
           return user;
         }

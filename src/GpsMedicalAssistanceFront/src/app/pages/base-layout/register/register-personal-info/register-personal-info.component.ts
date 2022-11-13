@@ -94,14 +94,14 @@ export class RegisterPersonalInfoComponent implements OnInit {
 
     ngOnInit(): void {
         const personalInfo: AuthenticationRegister = this.registerManagerSvc.getPersonalInfo();
-        
+
         if(personalInfo.user.email) {
             this.form.controls['name'].setValue(personalInfo.user.name);
             this.form.controls['lastName'].setValue(personalInfo.user.lastName);
             this.form.controls['email'].setValue(personalInfo.user.email);
             const splittedIdentification: string[] = personalInfo.user.identification.split('-')
             this.form.controls['identificationType'].setValue(splittedIdentification[0]);
-            this.form.controls['identification'].setValue(splittedIdentification[1]);      
+            this.form.controls['identification'].setValue(splittedIdentification[1]);
             const formattedBirthDate: string = `${dayjs(personalInfo.user.birthDate).get('day')}-${dayjs(personalInfo.user.birthDate).get('month') + 1}-${dayjs(personalInfo.user.birthDate).get('year')}`
             this.form.controls['birthDate'].setValue(formattedBirthDate);
             const splittedPhone: string[] = personalInfo.user.phone.split('-');
@@ -110,7 +110,7 @@ export class RegisterPersonalInfoComponent implements OnInit {
             this.form.controls['imagePath'].setValue(personalInfo.user.imagePath);
             this.form.controls['password'].setValue(personalInfo.password);
             this.form.controls['confirmPassword'].setValue(personalInfo.password);
-        }              
+        }
     }
 
     onSubmitForm(): void {
