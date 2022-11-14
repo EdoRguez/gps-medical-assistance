@@ -56,18 +56,13 @@ namespace GpsMedicalAssistanceBack.Controllers
         public async Task<IActionResult> Post([FromBody] UserCreateDto dto)
         {
             var model = _mapper.Map<User>(dto);
-            
+
             _repo.User.CreateUser(model);
             await _repo.SaveAsync();
 
             var returnUser = _mapper.Map<UserDto>(model);
 
             return CreatedAtRoute("GetUser", new { id = returnUser.Id }, returnUser);
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
         }
     }
 }

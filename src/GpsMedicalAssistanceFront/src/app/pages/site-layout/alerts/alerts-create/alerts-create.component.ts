@@ -40,6 +40,8 @@ export class AlertsCreateComponent implements OnInit {
     isDestinationSelected: boolean = false;
     isFormSubmitted: boolean = false;
 
+    destinationSelectedCoordinates!: { lat: number, lon: number };
+
     form: FormGroup = new FormGroup({
         destination: new FormControl(null, [Validators.required]),
         identificationType: new FormControl('', [Validators.required]),
@@ -61,8 +63,7 @@ export class AlertsCreateComponent implements OnInit {
         private userSvc: UserService,
         private authSvc: AuthenticationService,
         private alertSvc: AlertService
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.isMapLoading = false;
@@ -76,7 +77,10 @@ export class AlertsCreateComponent implements OnInit {
     onSubmitForm(): void {
         this.isFormSubmitted = true;
 
-        if (this.form.valid) {
+        if (
+            this.form.controls['identification'].valid &&
+            this.isDestinationSelected
+        ) {
             this.loaderSvc.toggleLoader(true, 'Creando alerta..');
             this.isPageLoading = true;
 
@@ -84,10 +88,12 @@ export class AlertsCreateComponent implements OnInit {
                 identificationType:
                     this.form.controls['identificationType'].value,
                 identification: this.form.controls['identification'].value,
-                includes: [{
-                    name: 'FavoritePlaces',
-                    children: []
-                }]
+                includes: [
+                    {
+                        name: 'FavoritePlaces',
+                        children: [],
+                    },
+                ],
             };
 
             this.userSvc.getAllFilter(params).subscribe((users: User[]) => {
@@ -125,33 +131,67 @@ export class AlertsCreateComponent implements OnInit {
                                         ),
                                     };
 
-                                    console.log(alertCreate);
-
-                                    this.alertSvc.create(alertCreate).subscribe(
-                                        (x: Alert) => {
-                                            const modalAlertCreatedRef = this.modalService.open(
-                                                ModalAlertCreatedComponent,
-                                                {
-                                                    backdrop: 'static',
-                                                    keyboard: false
-                                                }
-                                            );
-                                            modalAlertCreatedRef.componentInstance.idAlert = x.id;
-                                            console.log('check returned');
-                                            console.log(x);
-                                        },
-                                        err => {
-                                            console.log('err');
-                                            console.log(err);
-                                        }
-                                    );
+                                    this.createAlert(alertCreate);
                                 }
+                            } else {
+                                const alertCreate: AlertCreate = {
+                                    currentLocationLatitude: this.lat,
+                                    currentLocationLongitude: this.lon,
+                                    destinationLocationLatitude: this.destinationSelectedCoordinates.lat,
+                                    destinationLocationLongitude: this.destinationSelectedCoordinates.lon,
+                                    alertUsers: this.buildAlertUserCreate(
+                                        users[0]
+                                    ),
+                                };
+
+                                this.createAlert(alertCreate);
                             }
                         },
                         () => {}
                     );
                 }
             });
+        }
+    }
+
+    onClickMapHome(): void {
+        let markerList: L.Layer[] = [];
+        let circleMarkerList: L.CircleMarker[] = [];
+        this.map.eachLayer((layer: any) => {
+            if (layer instanceof L.Marker) {
+                markerList.push(layer);
+            }
+
+            if (layer instanceof L.CircleMarker) {
+                circleMarkerList.push(layer);
+            }
+        });
+
+        if (markerList.length > 2) {
+            this.map.removeLayer(markerList[1]);
+        }
+
+        if (circleMarkerList.length > 2) {
+            this.map.removeLayer(circleMarkerList[1]);
+        }
+
+        let group = L.featureGroup(markerList);
+        this.map.fitBounds(group.getBounds());
+    }
+
+    onlyNumber(event: any): void {
+        const keyCode = event.keyCode;
+
+        const excludedKeys = [8, 37, 39, 46];
+
+        if (
+            !(
+                (keyCode >= 48 && keyCode <= 57) ||
+                (keyCode >= 96 && keyCode <= 105) ||
+                excludedKeys.includes(keyCode)
+            )
+        ) {
+            event.preventDefault();
         }
     }
 
@@ -178,14 +218,12 @@ export class AlertsCreateComponent implements OnInit {
     }
 
     private initMap(): void {
-        //configuración del mapa
         this.map = L.map('map', {
             center: [this.lat, this.lon],
             attributionControl: false,
             zoom: this.zoom,
         });
 
-        //iconos personalizados
         var iconDefault = L.icon({
             iconRetinaUrl,
             iconUrl,
@@ -198,7 +236,6 @@ export class AlertsCreateComponent implements OnInit {
         });
         L.Marker.prototype.options.icon = iconDefault;
 
-        //titulo
         const tiles = L.tileLayer(
             'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             {
@@ -206,9 +243,9 @@ export class AlertsCreateComponent implements OnInit {
                 maxZoom: 18,
             }
         );
+
         tiles.addTo(this.map);
 
-        //marca con pop up
         const marker = L.marker([this.lat, this.lon]).bindPopup(
             'Ubicación Actual',
             {
@@ -221,7 +258,6 @@ export class AlertsCreateComponent implements OnInit {
         marker.addTo(this.map);
         marker.openPopup();
 
-        //marca forma de circulo
         const mark = L.circleMarker([this.lat, this.lon]).addTo(this.map);
         mark.addTo(this.map);
 
@@ -233,6 +269,11 @@ export class AlertsCreateComponent implements OnInit {
         const mapDestination: MapSearchLocation = event.item;
 
         this.isDestinationSelected = true;
+
+        this.destinationSelectedCoordinates = {
+            lat: Number(mapDestination.lat),
+            lon: Number(mapDestination.lon)
+        }
 
         const marker = L.marker([
             Number(mapDestination.lat),
@@ -273,7 +314,7 @@ export class AlertsCreateComponent implements OnInit {
             this.map.removeLayer(circleMarkerList[1]);
         }
 
-        var group = L.featureGroup(markerList);
+        let group = L.featureGroup(markerList);
         this.map.fitBounds(group.getBounds());
     }
 
@@ -295,4 +336,25 @@ export class AlertsCreateComponent implements OnInit {
         );
 
     formatter = (x: MapSearchLocation) => x.display_name;
+
+    private createAlert(alertCreate: AlertCreate): void {
+        this.alertSvc.create(alertCreate).subscribe(
+            (x: Alert) => {
+                const modalAlertCreatedRef = this.modalService.open(
+                    ModalAlertCreatedComponent,
+                    {
+                        backdrop: 'static',
+                        keyboard: false,
+                    }
+                );
+                modalAlertCreatedRef.componentInstance.idAlert = x.id;
+                console.log('check returned');
+                console.log(x);
+            },
+            (err) => {
+                console.log('err');
+                console.log(err);
+            }
+        );
+    }
 }

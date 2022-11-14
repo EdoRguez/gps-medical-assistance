@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
+    NgbDate,
     NgbDateAdapter,
     NgbDateParserFormatter,
     NgbDateStruct,
 } from '@ng-bootstrap/ng-bootstrap';
+import { tap } from 'rxjs';
 import {
     CustomAdapter,
     CustomDateParserFormatter,
@@ -37,7 +39,21 @@ export class AlertsFilterComponent implements OnInit {
 
     constructor(private alertManager: AlertManagerService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.alertManager.alertFilterAction$.pipe(tap(
+            (x: AlertsFilter | null) => {
+                if(!this.form.dirty) {
+                    this.form.controls['name'].setValue(x?.name);
+                    this.form.controls['lastName'].setValue(x?.lastName);
+                    this.form.controls['identification'].setValue(x?.identification);
+                    this.form.controls['identificationType'].setValue(x?.identificationType);
+                    this.form.controls['age'].setValue(x?.age);
+                    this.form.controls['initDate'].setValue((x?.initDate) ? `${x.initDate.getDate()}-${x.initDate.getMonth() + 1}-${x.initDate.getFullYear()}` : null );
+                    this.form.controls['endDate'].setValue((x?.endDate) ? `${x.endDate.getDate()}-${x.endDate.getMonth() + 1}-${x.endDate.getFullYear()}` : null );
+                }
+            }
+        )).subscribe();
+    }
 
     onClickFilter(): void {
         const alertsFilter: AlertsFilter = {
