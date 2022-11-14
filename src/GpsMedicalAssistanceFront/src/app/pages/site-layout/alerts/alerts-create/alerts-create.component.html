@@ -8,13 +8,17 @@
 
     <h1 class="alert-title">Crear Alerta</h1>
 
-    <div class="map-container" [style.opacity]="(isPageLoading) ? '.5' : '1'">
+    <div class="map-container" [style.opacity]="isPageLoading ? '.5' : '1'">
         <div class="map-frame">
             <app-loader
                 *ngIf="isMapLoading"
                 [message]="'Cargando Mapa'"
             ></app-loader>
-            <div id="map"></div>
+            <div id="map">
+                <button class="map-home-btn" (click)="onClickMapHome()">
+                    <i class="fa-solid fa-house-chimney"></i>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -27,6 +31,7 @@
                         formControlName="destination"
                         id="typeahead-http"
                         type="text"
+                        placeholder="Ej: Hospital Pérez de León"
                         class="form-control form-control-sm"
                         [class.is-invalid]="searchFailedTextField"
                         [ngbTypeahead]="search"
@@ -34,10 +39,12 @@
                         [inputFormatter]="formatter"
                         (selectItem)="onSelectDestination($event)"
                         [class.is-invalid]="
-                            form.controls['destination'].invalid &&
-                            isFormSubmitted
+                            isFormSubmitted &&
+                            !isDestinationSelected
                         "
-                        [class.is-valid]="form.controls['destination'].valid && isDestinationSelected"
+                        [class.is-valid]="
+                            isDestinationSelected
+                        "
                     />
                     <small
                         *ngIf="searchingTextField"
@@ -47,6 +54,14 @@
                     <div class="invalid-feedback" *ngIf="searchFailedTextField">
                         No se encontraron datos
                     </div>
+                    <span
+                        *ngIf="
+                            isFormSubmitted &&
+                            !isDestinationSelected
+                        "
+                        class="invalid-feedback"
+                        >* Debe seleccionar un destino válido y que aparezca en el mapa</span
+                    >
                 </div>
             </div>
             <div class="col-12 col-sm-6 offset-sm-3">
@@ -79,6 +94,7 @@
                                 type="text"
                                 maxlength="9"
                                 class="form-control form-control-sm"
+                                (keydown)="onlyNumber($event)"
                                 [class.is-invalid]="
                                     form.controls['identification'].invalid &&
                                     isFormSubmitted

@@ -21,6 +21,31 @@ export class AlertMapComponent implements OnInit {
         this.initMap();
     }
 
+    onClickMapHome(): void {
+        let markerList: L.Layer[] = [];
+        let circleMarkerList: L.CircleMarker[] = [];
+        this.map.eachLayer((layer: any) => {
+            if (layer instanceof L.Marker) {
+                markerList.push(layer);
+            }
+
+            if (layer instanceof L.CircleMarker) {
+                circleMarkerList.push(layer);
+            }
+        });
+
+        if (markerList.length > 2) {
+            this.map.removeLayer(markerList[1]);
+        }
+
+        if (circleMarkerList.length > 2) {
+            this.map.removeLayer(circleMarkerList[1]);
+        }
+
+        let group = L.featureGroup(markerList);
+        this.map.fitBounds(group.getBounds());
+    }
+
     private initMap(): void {
         //configuración del mapa
         this.map = L.map('map', {
@@ -74,8 +99,6 @@ export class AlertMapComponent implements OnInit {
             this.alertCoordinates.currentLocation.longitude,
         ]).addTo(this.map);
         markCurrent.addTo(this.map);
-
-
 
         //marca con pop up
         const markerDestination = L.marker([

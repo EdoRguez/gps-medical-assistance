@@ -49,14 +49,14 @@ namespace GpsMedicalAssistanceBack.Controllers
                 return BadRequest(ModelState);
             }
 
-            var familiTypeIds = dto.User.Families.Select(x => x.Id_FamilyType).ToList();
-            if(!(await _repo.FamilyType.AreIdsValid(familiTypeIds)))
+            var familyTypeIds = dto.User.Families.Select(x => x.Id_FamilyType).ToList();
+            if(!(await _repo.FamilyType.AreIdsValid(familyTypeIds)))
             {
                 ModelState.AddModelError(AuthenticationSettings.FieldFamilies, AuthenticationSettings.ErrorMessageFamiliesIdFamilyType);
                 return BadRequest(ModelState);
             }
 
-            string imagePath = ImageManager.Base64ToImagePath(dto.User.ImagePath, string.Format("{0}-User", Guid.NewGuid()), "UserFaceImage", _env);
+            string? imagePath = ImageManager.Base64ToImagePath(dto.User.ImagePath, string.Format("{0}-User", Guid.NewGuid()), "UserFaceImage", _env);
 
             if(string.IsNullOrEmpty(imagePath))
             {
