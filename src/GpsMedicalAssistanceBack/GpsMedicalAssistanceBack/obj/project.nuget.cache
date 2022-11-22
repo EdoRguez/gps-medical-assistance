@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6Ri5CVquPrKpdsx6GmOLiOYauhs3smgbJzLByTjpQFnrowOdGgUIkgRkLF7p8H9baUIzGYyxdcPu3wXXLghrJQ==",
+  "dgSpecHash": "OYhW8zamiCMgE1ldHOzeGgkpfQ8uvLIj0/H1eWFPpAk/d6aLstbS81fceTIQncK3yM4GEA/BhLm6AzkUc2oFWg==",
   "success": true,
-  "projectFilePath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack.csproj",
+  "projectFilePath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/GpsMedicalAssistanceBack.csproj",
   "expectedPackageFiles": [
     "/Users/pc/.nuget/packages/automapper/12.0.0/automapper.12.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

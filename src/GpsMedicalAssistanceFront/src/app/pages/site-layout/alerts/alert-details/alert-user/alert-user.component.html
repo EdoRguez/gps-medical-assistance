@@ -1,17 +1,15 @@
 <div class="row">
     <div class="col-12 d-flex flex-column align-items-center">
         <div class="my-4">
-            <img class="img-fluid img-user" [src]="user?.imagePath | apiImageBase64">
+            <img *ngIf="!isUserAnonymous" class="img-fluid img-user" [src]="user?.imagePath | apiImageBase64">
+            <img *ngIf="isUserAnonymous" class="img-fluid img-user" src="assets/icons/user.png">
         </div>
 
-        <h6 class="user-name">{{ user?.name }} {{ user?.lastName }}</h6>
-        <h6 class="user-identification">{{ user?.identification }}</h6>
-        <h6 class="user-age">{{ getUserYears(user?.birthDate) }} años</h6>
-        <h6 class="user-phone" *ngIf="isCreatorUser">{{ user?.phone }}</h6>
+        <h6 class="user-name">{{ getUserName() | titlecase }} </h6>
+        <h6 class="user-identification"><b>Cédula:</b> {{ getUserIdentification() }}</h6>
+        <h6 class="user-age"><b>Edad:</b> {{ getUserYears(user?.birthDate) }}</h6>
+        <h6 *ngIf="isUserAnonymous && !isCreatorUser" class="user-gender"><b>Género:</b> {{ getUserGender() }}</h6>
+        <h6 *ngIf="isUserAnonymous && !isCreatorUser" class="user-height"><b>Altura:</b> {{ getUserHeight() }}</h6>
+        <h6 class="user-phone" *ngIf="isCreatorUser"><b>Teléfono:</b> {{ getUserPhone() }}</h6>
     </div>
-
-    <div class="col-12 ">
-
-    </div>
-
 </div>

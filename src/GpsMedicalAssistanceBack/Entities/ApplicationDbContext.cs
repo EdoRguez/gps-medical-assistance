@@ -40,5 +40,6 @@ namespace Entities
         public DbSet<Alert> Alerts { get; set; }
         public DbSet<AlertUser> AlertUsers { get; set; }
         public DbSet<AlertUserType> AlertUserTypes { get; set; }
+        public DbSet<UserAnonymous> UserAnonymous { get; set; }
     }
 }

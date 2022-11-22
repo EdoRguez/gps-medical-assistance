@@ -21,6 +21,7 @@ import { AlertUserComponent } from './alert-details/alert-user/alert-user.compon
 import { AlertLastMovementsComponent } from './alert-details/alert-last-movements/alert-last-movements.component';
 import { AlertMapComponent } from './alert-details/alert-map/alert-map.component';
 import { GlobalPipesModule } from 'src/app/shared/pipes/global-pipes.module';
+import { ModalUserAnonymousCreateComponent } from './alerts-create/modal-user-anonymous-create/modal-user-anonymous-create.component';
 
 registerLocaleData(localeEs, 'es', localeEsExtra);
 
@@ -35,7 +36,8 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
     AlertDetailsComponent,
     AlertUserComponent,
     AlertLastMovementsComponent,
-    AlertMapComponent
+    AlertMapComponent,
+    ModalUserAnonymousCreateComponent
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ using Entities.DataTransferObjects.Family;
 using Entities.DataTransferObjects.FamilyType;
 using Entities.DataTransferObjects.FavoritePlace;
 using Entities.DataTransferObjects.User;
+using Entities.DataTransferObjects.UserAnonymous;
 using Entities.Models;
 
 namespace GpsMedicalAssistanceBack
@@ -42,6 +43,10 @@ namespace GpsMedicalAssistanceBack
             // AlertUser Mapping
             CreateMap<AlertUser, AlertUserDto>();
             CreateMap<AlertUserCreateDto, AlertUser>();
+
+            // User Anonymous Mapping
+            CreateMap<UserAnonymous, UserAnonymousDto>();
+            CreateMap<UserAnonymousCreateDto, UserAnonymous>();
         }
     }
 }

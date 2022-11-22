@@ -56,7 +56,7 @@ namespace GpsMedicalAssistanceBack.Controllers
                 return BadRequest(ModelState);
             }
 
-            string? imagePath = ImageManager.Base64ToImagePath(dto.User.ImagePath, string.Format("{0}-User", Guid.NewGuid()), "UserFaceImage", _env);
+            string imagePath = ImageManager.Base64ToImagePath(dto.User.ImagePath, string.Format("{0}-User", Guid.NewGuid()), "UserFaceImage", _env);
 
             if(string.IsNullOrEmpty(imagePath))
             {
@@ -67,7 +67,7 @@ namespace GpsMedicalAssistanceBack.Controllers
             dto.User.ImagePath = imagePath;
 
             User userToCreate = _mapper.Map<User>(dto.User);
-            var createdUser = await _repo.Authentication.Register(userToCreate, dto.Password);
+            var createdUser = _repo.Authentication.Register(userToCreate, dto.Password);
             await _repo.SaveAsync();
 
             var dtoUser = _mapper.Map<UserDto>(createdUser);

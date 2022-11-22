@@ -14,8 +14,7 @@ export class ModalAlertUserComponent implements OnInit {
   @Input() user!: User;
   userAge!: number;
 
-  constructor(public activeModal: NgbActiveModal,
-              private domSanitizer: DomSanitizer) { }
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
     if(this.user) {

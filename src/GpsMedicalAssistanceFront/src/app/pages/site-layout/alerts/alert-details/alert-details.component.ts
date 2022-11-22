@@ -4,6 +4,7 @@ import { User } from 'src/app/shared/interfaces/user.interface';
 import { LoaderService } from 'src/app/shared/services/general/loader.service';
 import { MapSearchLocationService } from 'src/app/shared/services/map/map-search-location.service';
 import { Alert } from '../interfaces/alert.interface';
+import { UserAnonymous } from '../interfaces/user-anonymous.interface';
 import { AlertService } from '../services/alert.service';
 import { AlertCoordinates } from './interfaces/alert-coordinates.interface';
 
@@ -44,6 +45,11 @@ export class AlertDetailsComponent implements OnInit {
 
     getUser(alertUserType: number): User | null {
         const user = this.alert.alertUsers.find(x => x.id_AlertUserType === alertUserType)?.user;
+        return user ?? null;
+    }
+
+    getUserAnonymous(alertUserType: number): UserAnonymous | null {
+        const user = this.alert.alertUsers.find(x => x.id_AlertUserType === alertUserType)?.userAnonymous;
         return user ?? null;
     }
 
