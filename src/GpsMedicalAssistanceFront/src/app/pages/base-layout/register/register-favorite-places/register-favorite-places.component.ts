@@ -1,6 +1,7 @@
 import {
     Component,
     ElementRef,
+    OnDestroy,
     OnInit,
     Output,
     ViewChild,
@@ -31,7 +32,7 @@ import { RegisterManagerService } from '../services/register-manager.service';
     templateUrl: './register-favorite-places.component.html',
     styleUrls: ['./register-favorite-places.component.scss'],
 })
-export class RegisterFavoritePlacesComponent implements OnInit {
+export class RegisterFavoritePlacesComponent implements OnInit, OnDestroy {
     @Output() changeStepClick = new Subject<boolean>();
 
     favoritePlaces: FavoritePlaceCreate[] = [];
@@ -55,6 +56,10 @@ export class RegisterFavoritePlacesComponent implements OnInit {
         if (favoritePlacesSaved) {
             this.favoritePlaces = favoritePlacesSaved;
         }
+    }
+
+    ngOnDestroy(): void {
+        this.modalService.dismissAll();
     }
 
     onSelectDestination(event: any, inputSearch: any): void {

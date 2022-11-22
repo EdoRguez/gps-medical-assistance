@@ -12,8 +12,7 @@ export class ModalAlertCreatedComponent implements OnInit {
   @Input() idAlert!: number;
 
   constructor(public activeModal: NgbActiveModal,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              private router: Router) { }
 
   ngOnInit(): void {
   }

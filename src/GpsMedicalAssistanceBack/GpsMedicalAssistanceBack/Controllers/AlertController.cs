@@ -42,7 +42,8 @@ namespace GpsMedicalAssistanceBack.Controllers
                     Name = "AlertUsers",
                     Children =  new List<IncludesGeneral>()
                     {
-                        new IncludesGeneral() { Name = "User" }
+                        new IncludesGeneral() { Name = "User" },
+                        new IncludesGeneral() { Name = "UserAnonymous"}
                     }
                 }
             };

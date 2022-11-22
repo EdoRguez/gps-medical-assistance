@@ -1,0 +1,160 @@
+<div class="modal-header">
+    <h4 class="modal-title" ngbAutofocus>Usuario Anónimo</h4>
+    <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="activeModal.dismiss()"
+    ></button>
+</div>
+<div class="modal-body">
+    <p class="text-center">{{ (isCreationUserAnonymous) ? '¡Parece que eres un usuario anónimo!' : 'Usuario NO encontrado' }}</p>
+    <div class="d-flex justify-content-center">
+        <img
+            class="img-fluid anonymous-icon"
+            [src]="(isCreationUserAnonymous) ? 'assets/icons/anonymous_icon.png' : 'assets/icons/user.png'"
+        />
+    </div>
+    <p class="text-center" *ngIf="isCreationUserAnonymous">
+        Por favor llena los datos <b>opcionales</b> para ponernos en contacto
+        contigo de ser necesario, o también puedes iniciar sesión
+    </p>
+    <p class="text-center" *ngIf="!isCreationUserAnonymous">
+        Parece que el usuario en riesgo no está registrado en nuestra plataforma, por favor llena los datos que creas que corresponden con la persona para así poder indentificarla
+    </p>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group mt-3">
+                    <label>Nombre:</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="name"
+                        maxlength="50"
+                        [class.is-valid]="form.controls['name'].value"
+                    />
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group mt-3">
+                    <label>Cédula:</label>
+                    <div class="row">
+                        <div class="col-3">
+                            <select
+                                class="form-control form-control-sm"
+                                formControlName="identificationType"
+                                [class.is-valid]="
+                                    form.controls['identificationType'].value
+                                "
+                            >
+                                <option value="" selected>-</option>
+                                <option value="V">V</option>
+                                <option value="J">J</option>
+                                <option value="E">E</option>
+                                <option value="P">P</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                        <div class="col-9">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                formControlName="identification"
+                                maxlength="9"
+                                (keydown)="onlyNumber($event)"
+                                [class.is-valid]="
+                                    form.controls['identification'].value
+                                "
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="isCreationUserAnonymous">
+                <div class="form-group mt-3">
+                    <label>Teléfono:</label>
+                    <div class="row">
+                        <div class="col-3">
+                            <select
+                                class="form-control form-control-sm"
+                                formControlName="phoneType"
+                                [class.is-valid]="
+                                    form.controls['phoneType'].value
+                                "
+                            >
+                                <option value="" selected>-</option>
+                                <option value="0414">0414</option>
+                                <option value="0424">0424</option>
+                                <option value="0412">0412</option>
+                                <option value="0416">0416</option>
+                                <option value="0426">0426</option>
+                            </select>
+                        </div>
+
+                        <div class="col-9">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                formControlName="phone"
+                                (keydown)="onlyNumber($event)"
+                                maxlength="7"
+                                [class.is-valid]="form.controls['phone'].value"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="!isCreationUserAnonymous">
+                <div class="form-group mt-3">
+                    <label>Edad Aproximada:</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        formControlName="age"
+                        maxlength="3"
+                        (keydown)="onlyNumber($event)"
+                        [class.is-valid]="form.controls['age'].value"
+                    />
+                </div>
+            </div>
+            <div class="col-12" *ngIf="!isCreationUserAnonymous">
+                <div class="form-group mt-3">
+                    <label>Género:</label>
+                    <select
+                        class="form-control form-control-sm"
+                        formControlName="gender"
+                        [class.is-valid]="form.controls['gender'].value"
+                    >
+                        <option value="" selected>-</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="!isCreationUserAnonymous">
+                <div class="form-group mt-3">
+                    <label>Altura Aproximada (metros)</label>
+                    <input
+                        #heightInput
+                        type="text"
+                        class="form-control form-control-sm"
+                        maxlength="4"
+                        formControlName="height"
+                        placeholder="1.50"
+                        [class.is-valid]="form.controls['height'].value"
+                        (keydown)="onlyDecimals(heightInput, $event)"
+                    />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer d-flex" [ngClass]="(isCreationUserAnonymous) ? 'justify-content-between' : 'justify-content-end'">
+    <button *ngIf="isCreationUserAnonymous" type="button" class="btn btn-main" (click)="onNavigateToLogin()">
+        Iniciar Sesión
+    </button>
+    <button type="button" class="btn btn-main" (click)="onSaveAnonymousData()">
+        Guardar
+    </button>
+</div>

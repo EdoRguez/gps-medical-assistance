@@ -53,6 +53,10 @@ export class AlertsListComponent implements OnInit {
                             name: 'User',
                             children: [],
                         },
+                        {
+                            name: 'UserAnonymous',
+                            children: []
+                        }
                     ],
                 },
             ],
@@ -76,5 +80,13 @@ export class AlertsListComponent implements OnInit {
                 })
             )
             .subscribe();
+    }
+
+    getAlertUserName(alert: Alert): string {
+        if(alert.alertUsers[0].user) {
+            return `${alert.alertUsers[0].user.name} ${alert.alertUsers[0].user.lastName}`;
+        } else {
+            return (alert.alertUsers[0].userAnonymous?.name) ? alert.alertUsers[0].userAnonymous.name : 'Usuario Anónimo';
+        }
     }
 }

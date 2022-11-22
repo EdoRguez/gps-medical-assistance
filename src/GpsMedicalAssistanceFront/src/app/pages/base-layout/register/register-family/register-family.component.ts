@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import {
     AbstractControl,
     FormControl,
@@ -19,7 +19,7 @@ import { RegisterManagerService } from '../services/register-manager.service';
     templateUrl: './register-family.component.html',
     styleUrls: ['./register-family.component.scss'],
 })
-export class RegisterFamilyComponent implements OnInit {
+export class RegisterFamilyComponent implements OnInit, OnDestroy {
     @Output() changeStepClick = new Subject<boolean>();
 
     familyTypes: FamilyType[] = [];
@@ -30,7 +30,7 @@ export class RegisterFamilyComponent implements OnInit {
     formMode: string = FormMode.CreationMode;
 
     form: FormGroup = new FormGroup({
-        id_FamilyType: new FormControl("", [Validators.required]),
+        id_FamilyType: new FormControl('', [Validators.required]),
         name: new FormControl(null, [
             Validators.required,
             Validators.minLength(4),
@@ -49,23 +49,29 @@ export class RegisterFamilyComponent implements OnInit {
             Validators.maxLength(9),
             Validators.pattern(/^[0-9]*$/),
         ]),
-        identificationType: new FormControl("", [Validators.required]),
+        identificationType: new FormControl('', [Validators.required]),
         phone: new FormControl(null, [
             Validators.required,
             Validators.minLength(7),
             Validators.maxLength(7),
             Validators.pattern(/^[0-9]*$/),
         ]),
-        phoneType: new FormControl("", [Validators.required]),
+        phoneType: new FormControl('', [Validators.required]),
     });
 
-    constructor(private modalService: NgbModal, 
-                private familyTypeSvc: FamilyTypeService,
-                private registerManagerSvc: RegisterManagerService) {}
+    constructor(
+        private modalService: NgbModal,
+        private familyTypeSvc: FamilyTypeService,
+        private registerManagerSvc: RegisterManagerService
+    ) {}
 
     ngOnInit(): void {
         this.getFamilyTypes();
         this.getTemporalSavedFamilies();
+    }
+
+    ngOnDestroy(): void {
+        this.modalService.dismissAll();
     }
 
     open(modalContent: any): void {
@@ -82,7 +88,7 @@ export class RegisterFamilyComponent implements OnInit {
         this.changeStepClick.next(false);
     }
 
-    nextSetp(): void {
+    nextStep(): void {
         this.registerManagerSvc.updateFamilies(this.families);
         this.changeStepClick.next(true);
     }
@@ -163,23 +169,28 @@ export class RegisterFamilyComponent implements OnInit {
     }
 
     getFamilyTypeNameById(id: number): string {
-        const familyType: FamilyType | undefined = this.familyTypes.find(x => x.id === +id);
-        return (familyType) ? familyType.name : '-';
-
+        const familyType: FamilyType | undefined = this.familyTypes.find(
+            (x) => x.id === +id
+        );
+        return familyType ? familyType.name : '-';
     }
 
     private getFamilyTypes(): void {
-        this.familyTypeSvc.getFamilyTypes().pipe(
-            tap(
-                (x: FamilyType[]) => {this.familyTypes = x}
+        this.familyTypeSvc
+            .getFamilyTypes()
+            .pipe(
+                tap((x: FamilyType[]) => {
+                    this.familyTypes = x;
+                })
             )
-        ).subscribe();
+            .subscribe();
     }
 
     private getTemporalSavedFamilies(): void {
-        const familiesSaved: FamilyCreate[] = this.registerManagerSvc.getFamilies();
-        if(familiesSaved) {
+        const familiesSaved: FamilyCreate[] =
+            this.registerManagerSvc.getFamilies();
+        if (familiesSaved) {
             this.families = familiesSaved;
-        } 
+        }
     }
 }

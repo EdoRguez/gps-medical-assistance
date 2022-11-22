@@ -106,12 +106,12 @@ namespace Repository.Core
         {
             foreach (var item in includes)
             {
-                includeQuery = String.IsNullOrEmpty(includeQuery) ? item.Name : $"{includeQuery}.{item.Name}";
+                string modelQuery = String.IsNullOrEmpty(includeQuery) ? item.Name : $"{includeQuery}.{item.Name}";
 
                 if (item.Children.Count > 0)
-                    ManageIncludes(ref query, item.Children, includeQuery);
+                    ManageIncludes(ref query, item.Children, modelQuery);
                 else
-                    query = query.Include(includeQuery);
+                    query = query.Include(modelQuery);
             }
         }
     }

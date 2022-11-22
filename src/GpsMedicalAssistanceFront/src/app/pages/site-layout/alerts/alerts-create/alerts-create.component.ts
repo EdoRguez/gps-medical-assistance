@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnDestroy, OnInit } from '@angular/core';
 import { MapSearchLocationService } from 'src/app/shared/services/map/map-search-location.service';
 import {
     catchError,
@@ -8,6 +8,7 @@ import {
     of,
     tap,
     switchMap,
+    firstValueFrom,
 } from 'rxjs';
 import { MapSearchLocation } from 'src/app/shared/interfaces/mapSearchLocation.interface';
 import * as L from 'leaflet';
@@ -24,6 +25,8 @@ import { AuthenticationService } from 'src/app/shared/services/authentication/au
 import { AlertService } from '../services/alert.service';
 import { Alert } from '../interfaces/alert.interface';
 import { ModalAlertCreatedComponent } from './modal-alert-created/modal-alert-created.component';
+import { ModalUserAnonymousCreateComponent } from './modal-user-anonymous-create/modal-user-anonymous-create.component';
+import { UserAnonymous } from '../interfaces/user-anonymous.interface';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -34,13 +37,14 @@ const shadowUrl = 'assets/marker-shadow.png';
     templateUrl: './alerts-create.component.html',
     styleUrls: ['./alerts-create.component.scss'],
 })
-export class AlertsCreateComponent implements OnInit {
+export class AlertsCreateComponent implements OnInit, OnDestroy {
     isMapLoading: boolean = true;
     isPageLoading: boolean = false;
     isDestinationSelected: boolean = false;
     isFormSubmitted: boolean = false;
 
-    destinationSelectedCoordinates!: { lat: number, lon: number };
+    destinationSelectedCoordinates!: { lat: number; lon: number };
+    creationUserAnonymous: UserAnonymous | null = null;
 
     form: FormGroup = new FormGroup({
         destination: new FormControl(null, [Validators.required]),
@@ -74,8 +78,13 @@ export class AlertsCreateComponent implements OnInit {
         this.initMap();
     }
 
-    onSubmitForm(): void {
+    ngOnDestroy(): void {
+        this.modalService.dismissAll();
+    }
+
+    async onSubmitForm(): Promise<void> {
         this.isFormSubmitted = true;
+        this.creationUserAnonymous = null;
 
         if (
             this.form.controls['identification'].valid &&
@@ -84,99 +93,277 @@ export class AlertsCreateComponent implements OnInit {
             this.loaderSvc.toggleLoader(true, 'Creando alerta..');
             this.isPageLoading = true;
 
-            const params: UserParameters = {
-                identificationType:
-                    this.form.controls['identificationType'].value,
-                identification: this.form.controls['identification'].value,
-                includes: [
-                    {
-                        name: 'FavoritePlaces',
-                        children: [],
-                    },
-                ],
-            };
+            let isUserLogged = await firstValueFrom(
+                this.authSvc.isUserLogged$
+            ).then((result: boolean) => result);
 
-            this.userSvc.getAllFilter(params).subscribe((users: User[]) => {
-                if (users) {
+            if (isUserLogged) {
+                this.creationUserAnonymous = null;
+
+                const params: UserParameters = {
+                    identificationType:
+                        this.form.controls['identificationType'].value,
+                    identification: this.form.controls['identification'].value,
+                    includes: [
+                        {
+                            name: 'FavoritePlaces',
+                            children: [],
+                        },
+                    ],
+                };
+
+                this.userSvc.getAllFilter(params).subscribe((users: User[]) => {
                     this.isPageLoading = false;
                     this.loaderSvc.toggleLoader(false);
 
-                    const modalAlertUserRef = this.modalService.open(
-                        ModalAlertUserComponent,
-                        {
-                            backdrop: 'static',
-                            keyboard: false,
-                            size: 'lg',
-                        }
-                    );
-                    modalAlertUserRef.componentInstance.user = users[0];
+                    if (users.length > 0) {
+                        const modalAlertUserRef = this.modalService.open(
+                            ModalAlertUserComponent,
+                            {
+                                backdrop: 'static',
+                                keyboard: false,
+                                size: 'lg',
+                            }
+                        );
+                        modalAlertUserRef.componentInstance.user = users[0];
 
-                    modalAlertUserRef.result.then(
-                        (idPlace: number) => {
-                            if (idPlace) {
-                                const destinationLocation =
-                                    users[0].favoritePlaces.find(
-                                        (x) => x.id === idPlace
-                                    );
-                                if (destinationLocation) {
+                        modalAlertUserRef.result.then(
+                            (idPlace: number) => {
+                                if (idPlace) {
+                                    const destinationLocation =
+                                        users[0].favoritePlaces.find(
+                                            (x) => x.id === idPlace
+                                        );
+                                    if (destinationLocation) {
+                                        const alertCreate: AlertCreate = {
+                                            currentLocationLatitude: this.lat,
+                                            currentLocationLongitude: this.lon,
+                                            destinationLocationLatitude:
+                                                destinationLocation.latitude,
+                                            destinationLocationLongitude:
+                                                destinationLocation.longitude,
+                                            alertUsers:
+                                                this.buildAlertUserCreate(
+                                                    users[0],
+                                                    null
+                                                ),
+                                        };
+
+                                        this.createAlert(alertCreate);
+                                    }
+                                } else {
                                     const alertCreate: AlertCreate = {
                                         currentLocationLatitude: this.lat,
                                         currentLocationLongitude: this.lon,
                                         destinationLocationLatitude:
-                                            destinationLocation.latitude,
+                                            this.destinationSelectedCoordinates
+                                                .lat,
                                         destinationLocationLongitude:
-                                            destinationLocation.longitude,
+                                            this.destinationSelectedCoordinates
+                                                .lon,
                                         alertUsers: this.buildAlertUserCreate(
-                                            users[0]
+                                            users[0],
+                                            null
                                         ),
                                     };
 
                                     this.createAlert(alertCreate);
                                 }
-                            } else {
-                                const alertCreate: AlertCreate = {
-                                    currentLocationLatitude: this.lat,
-                                    currentLocationLongitude: this.lon,
-                                    destinationLocationLatitude: this.destinationSelectedCoordinates.lat,
-                                    destinationLocationLongitude: this.destinationSelectedCoordinates.lon,
-                                    alertUsers: this.buildAlertUserCreate(
-                                        users[0]
-                                    ),
-                                };
+                            },
+                            () => {}
+                        );
+                    } else {
+                        const modalUserAnonymousRef = this.modalService.open(
+                            ModalUserAnonymousCreateComponent
+                        );
+                        modalUserAnonymousRef.componentInstance.isCreationUserAnonymous =
+                            false;
 
-                                this.createAlert(alertCreate);
-                            }
-                        },
-                        () => {}
-                    );
-                }
-            });
+                        modalUserAnonymousRef.result.then(
+                            (userAnonymousRisk: UserAnonymous) => {
+                                if (userAnonymousRisk) {
+                                    const alertCreate: AlertCreate = {
+                                        currentLocationLatitude: this.lat,
+                                        currentLocationLongitude: this.lon,
+                                        destinationLocationLatitude:
+                                            this.destinationSelectedCoordinates
+                                                .lat,
+                                        destinationLocationLongitude:
+                                            this.destinationSelectedCoordinates
+                                                .lon,
+                                        alertUsers: this.buildAlertUserCreate(
+                                            null,
+                                            userAnonymousRisk
+                                        ),
+                                    };
+
+                                    this.createAlert(alertCreate);
+                                }
+                            },
+                            () => {}
+                        );
+                    }
+                });
+            } else {
+                this.loaderSvc.toggleLoader(false);
+                this.isPageLoading = false;
+                const modalUserAnonymousRef = this.modalService.open(
+                    ModalUserAnonymousCreateComponent
+                );
+                modalUserAnonymousRef.componentInstance.isCreationUserAnonymous =
+                    true;
+
+                modalUserAnonymousRef.result.then(
+                    (userAnonymous: UserAnonymous) => {
+                        if (userAnonymous) {
+                            this.creationUserAnonymous = userAnonymous;
+
+                            const params: UserParameters = {
+                                identificationType:
+                                    this.form.controls['identificationType']
+                                        .value,
+                                identification:
+                                    this.form.controls['identification'].value,
+                                includes: [
+                                    {
+                                        name: 'FavoritePlaces',
+                                        children: [],
+                                    },
+                                ],
+                            };
+
+                            this.userSvc
+                                .getAllFilter(params)
+                                .subscribe((users: User[]) => {
+                                    if (users.length > 0) {
+                                        this.isPageLoading = false;
+                                        this.loaderSvc.toggleLoader(false);
+
+                                        const modalAlertUserRef =
+                                            this.modalService.open(
+                                                ModalAlertUserComponent,
+                                                {
+                                                    backdrop: 'static',
+                                                    keyboard: false,
+                                                    size: 'lg',
+                                                }
+                                            );
+                                        modalAlertUserRef.componentInstance.user =
+                                            users[0];
+
+                                        modalAlertUserRef.result.then(
+                                            (idPlace: number) => {
+                                                if (idPlace) {
+                                                    const destinationLocation =
+                                                        users[0].favoritePlaces.find(
+                                                            (x) =>
+                                                                x.id === idPlace
+                                                        );
+                                                    if (destinationLocation) {
+                                                        const alertCreate: AlertCreate =
+                                                            {
+                                                                currentLocationLatitude:
+                                                                    this.lat,
+                                                                currentLocationLongitude:
+                                                                    this.lon,
+                                                                destinationLocationLatitude:
+                                                                    destinationLocation.latitude,
+                                                                destinationLocationLongitude:
+                                                                    destinationLocation.longitude,
+                                                                alertUsers:
+                                                                    this.buildAlertUserCreate(
+                                                                        users[0],
+                                                                        null
+                                                                    ),
+                                                            };
+
+                                                        this.createAlert(
+                                                            alertCreate
+                                                        );
+                                                    }
+                                                } else {
+                                                    const alertCreate: AlertCreate =
+                                                        {
+                                                            currentLocationLatitude:
+                                                                this.lat,
+                                                            currentLocationLongitude:
+                                                                this.lon,
+                                                            destinationLocationLatitude:
+                                                                this
+                                                                    .destinationSelectedCoordinates
+                                                                    .lat,
+                                                            destinationLocationLongitude:
+                                                                this
+                                                                    .destinationSelectedCoordinates
+                                                                    .lon,
+                                                            alertUsers:
+                                                                this.buildAlertUserCreate(
+                                                                    users[0],
+                                                                    null
+                                                                ),
+                                                        };
+
+                                                    this.createAlert(
+                                                        alertCreate
+                                                    );
+                                                }
+                                            },
+                                            () => {}
+                                        );
+                                    } else {
+                                        // emergency user is anonymous
+                                        const modalUserAnonymousRef =
+                                            this.modalService.open(
+                                                ModalUserAnonymousCreateComponent
+                                            );
+                                        modalUserAnonymousRef.componentInstance.isCreationUserAnonymous =
+                                            false;
+
+                                        modalUserAnonymousRef.result.then(
+                                            (
+                                                userAnonymousRisk: UserAnonymous
+                                            ) => {
+                                                if (userAnonymousRisk) {
+                                                    const alertCreate: AlertCreate =
+                                                        {
+                                                            currentLocationLatitude:
+                                                                this.lat,
+                                                            currentLocationLongitude:
+                                                                this.lon,
+                                                            destinationLocationLatitude:
+                                                                this
+                                                                    .destinationSelectedCoordinates
+                                                                    .lat,
+                                                            destinationLocationLongitude:
+                                                                this
+                                                                    .destinationSelectedCoordinates
+                                                                    .lon,
+                                                            alertUsers:
+                                                                this.buildAlertUserCreate(
+                                                                    null,
+                                                                    userAnonymousRisk
+                                                                ),
+                                                        };
+
+                                                    this.createAlert(
+                                                        alertCreate
+                                                    );
+                                                }
+                                            },
+                                            () => {}
+                                        );
+                                    }
+                                });
+                        }
+                    },
+                    () => {}
+                );
+            }
         }
     }
 
     onClickMapHome(): void {
-        let markerList: L.Layer[] = [];
-        let circleMarkerList: L.CircleMarker[] = [];
-        this.map.eachLayer((layer: any) => {
-            if (layer instanceof L.Marker) {
-                markerList.push(layer);
-            }
-
-            if (layer instanceof L.CircleMarker) {
-                circleMarkerList.push(layer);
-            }
-        });
-
-        if (markerList.length > 2) {
-            this.map.removeLayer(markerList[1]);
-        }
-
-        if (circleMarkerList.length > 2) {
-            this.map.removeLayer(circleMarkerList[1]);
-        }
-
-        let group = L.featureGroup(markerList);
-        this.map.fitBounds(group.getBounds());
+        this.fitMapView();
     }
 
     onlyNumber(event: any): void {
@@ -195,24 +382,45 @@ export class AlertsCreateComponent implements OnInit {
         }
     }
 
-    private buildAlertUserCreate(userToHelp: User): AlertUserCreate[] {
-        let alertUserCreate: AlertUserCreate[] = [
-            {
-                id_User: userToHelp.id,
-                id_AlertUserType: 2,
-            },
-        ];
+    private buildAlertUserCreate(
+        userToHelp: User | null,
+        userAnonymousToHelp: UserAnonymous | null
+    ): AlertUserCreate[] {
+        let alertUserCreate: AlertUserCreate[] = [];
 
-        this.authSvc.getUserLogged$.subscribe({
-            next: (user: User | null) => {
-                if (user) {
-                    alertUserCreate.push({
-                        id_User: user.id,
-                        id_AlertUserType: 1,
-                    });
-                }
-            },
-        });
+        if (userToHelp != null) {
+            alertUserCreate.push({
+                id_User: userToHelp.id,
+                userAnonymous: null,
+                id_AlertUserType: 2,
+            });
+        } else {
+            alertUserCreate.push({
+                id_User: null,
+                userAnonymous: userAnonymousToHelp,
+                id_AlertUserType: 2,
+            });
+        }
+
+        if (this.creationUserAnonymous) {
+            alertUserCreate.push({
+                userAnonymous: this.creationUserAnonymous,
+                id_User: null,
+                id_AlertUserType: 1,
+            });
+        } else {
+            this.authSvc.getUserLogged$.subscribe({
+                next: (user: User | null) => {
+                    if (user) {
+                        alertUserCreate.push({
+                            id_User: user.id,
+                            userAnonymous: null,
+                            id_AlertUserType: 1,
+                        });
+                    }
+                },
+            });
+        }
 
         return alertUserCreate;
     }
@@ -272,8 +480,8 @@ export class AlertsCreateComponent implements OnInit {
 
         this.destinationSelectedCoordinates = {
             lat: Number(mapDestination.lat),
-            lon: Number(mapDestination.lon)
-        }
+            lon: Number(mapDestination.lon),
+        };
 
         const marker = L.marker([
             Number(mapDestination.lat),
@@ -294,28 +502,7 @@ export class AlertsCreateComponent implements OnInit {
         ]).addTo(this.map);
         mark.addTo(this.map);
 
-        let markerList: L.Layer[] = [];
-        let circleMarkerList: L.CircleMarker[] = [];
-        this.map.eachLayer((layer: any) => {
-            if (layer instanceof L.Marker) {
-                markerList.push(layer);
-            }
-
-            if (layer instanceof L.CircleMarker) {
-                circleMarkerList.push(layer);
-            }
-        });
-
-        if (markerList.length > 2) {
-            this.map.removeLayer(markerList[1]);
-        }
-
-        if (circleMarkerList.length > 2) {
-            this.map.removeLayer(circleMarkerList[1]);
-        }
-
-        let group = L.featureGroup(markerList);
-        this.map.fitBounds(group.getBounds());
+        this.fitMapView();
     }
 
     search = (text$: Observable<string>) =>
@@ -338,8 +525,8 @@ export class AlertsCreateComponent implements OnInit {
     formatter = (x: MapSearchLocation) => x.display_name;
 
     private createAlert(alertCreate: AlertCreate): void {
-        this.alertSvc.create(alertCreate).subscribe(
-            (x: Alert) => {
+        this.alertSvc.create(alertCreate).subscribe({
+            next: (x: Alert) => {
                 const modalAlertCreatedRef = this.modalService.open(
                     ModalAlertCreatedComponent,
                     {
@@ -351,10 +538,35 @@ export class AlertsCreateComponent implements OnInit {
                 console.log('check returned');
                 console.log(x);
             },
-            (err) => {
+            error: (err) => {
                 console.log('err');
                 console.log(err);
+            },
+        });
+    }
+
+    private fitMapView(): void {
+        let markerList: L.Layer[] = [];
+        let circleMarkerList: L.CircleMarker[] = [];
+        this.map.eachLayer((layer: any) => {
+            if (layer instanceof L.Marker) {
+                markerList.push(layer);
             }
-        );
+
+            if (layer instanceof L.CircleMarker) {
+                circleMarkerList.push(layer);
+            }
+        });
+
+        if (markerList.length > 2) {
+            this.map.removeLayer(markerList[1]);
+        }
+
+        if (circleMarkerList.length > 2) {
+            this.map.removeLayer(circleMarkerList[1]);
+        }
+
+        let group = L.featureGroup(markerList);
+        this.map.fitBounds(group.getBounds());
     }
 }

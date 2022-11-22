@@ -31,7 +31,7 @@ namespace GpsMedicalAssistanceBack.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("CurrentLocationLatitude")
                         .HasPrecision(12, 9)
@@ -68,7 +68,10 @@ namespace GpsMedicalAssistanceBack.Migrations
                     b.Property<int>("Id_AlertUserType")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Id_User")
+                    b.Property<int?>("Id_User")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Id_UserAnonymous")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -78,6 +81,9 @@ namespace GpsMedicalAssistanceBack.Migrations
                     b.HasIndex("Id_AlertUserType");
 
                     b.HasIndex("Id_User");
+
+                    b.HasIndex("Id_UserAnonymous")
+                        .IsUnique();
 
                     b.ToTable("AlertUsers");
                 });
@@ -260,7 +266,7 @@ namespace GpsMedicalAssistanceBack.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -304,6 +310,41 @@ namespace GpsMedicalAssistanceBack.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Entities.Models.UserAnonymous", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<short?>("Age")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Gender")
+                        .HasMaxLength(1)
+                        .HasColumnType("character varying(1)");
+
+                    b.Property<float?>("Height")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Identification")
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserAnonymous");
+                });
+
             modelBuilder.Entity("Entities.Models.AlertUser", b =>
                 {
                     b.HasOne("Entities.Models.Alert", "Alert")
@@ -320,15 +361,19 @@ namespace GpsMedicalAssistanceBack.Migrations
 
                     b.HasOne("Entities.Models.User", "User")
                         .WithMany("AlertUsers")
-                        .HasForeignKey("Id_User")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Id_User");
+
+                    b.HasOne("Entities.Models.UserAnonymous", "UserAnonymous")
+                        .WithOne("AlertUser")
+                        .HasForeignKey("Entities.Models.AlertUser", "Id_UserAnonymous");
 
                     b.Navigation("Alert");
 
                     b.Navigation("AlertUserType");
 
                     b.Navigation("User");
+
+                    b.Navigation("UserAnonymous");
                 });
 
             modelBuilder.Entity("Entities.Models.Family", b =>
@@ -378,6 +423,11 @@ namespace GpsMedicalAssistanceBack.Migrations
                     b.Navigation("Families");
 
                     b.Navigation("FavoritePlaces");
+                });
+
+            modelBuilder.Entity("Entities.Models.UserAnonymous", b =>
+                {
+                    b.Navigation("AlertUser");
                 });
 #pragma warning restore 612, 618
         }

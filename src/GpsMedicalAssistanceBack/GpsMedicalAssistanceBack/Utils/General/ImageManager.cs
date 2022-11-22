@@ -4,7 +4,7 @@ namespace GpsMedicalAssistanceBack.Utils.General
 {
     public static class ImageManager
     {
-        public static string? Base64ToImagePath(string base64, string imageName, string folderName, IWebHostEnvironment env)
+        public static string Base64ToImagePath(string base64, string imageName, string folderName, IWebHostEnvironment env)
         {
             try
             {
@@ -16,7 +16,7 @@ namespace GpsMedicalAssistanceBack.Utils.General
                     System.IO.Directory.CreateDirectory(path); //Create directory if it doesn't exist
                 }
 
-                string? fileExtension = GetFileExtension(base64);
+                string fileExtension = GetFileExtension(base64);
                 if (string.IsNullOrEmpty(fileExtension))
                     return null;
 
@@ -39,7 +39,7 @@ namespace GpsMedicalAssistanceBack.Utils.General
             }
         }
 
-        private static string? GetFileExtension(string base64String)
+        private static string GetFileExtension(string base64String)
         {
             var data = base64String.Substring(0, base64String.IndexOf(';'));
 

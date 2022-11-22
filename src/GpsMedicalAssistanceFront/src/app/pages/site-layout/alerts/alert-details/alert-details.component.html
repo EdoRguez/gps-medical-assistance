@@ -14,22 +14,31 @@
         <div class="col-12 col-sm-4">
             <h5 class="text-center">Usuario del Accidente</h5>
             <div class="user-box">
-                <app-alert-user [user]="getUser(2)"></app-alert-user>
+                <app-alert-user
+                    [user]="getUser(2)"
+                    [userAnonymous]="getUserAnonymous(2)"
+                ></app-alert-user>
             </div>
             <h5 class="mt-3 text-center">Usuario Creador</h5>
             <div class="user-box">
                 <app-alert-user
                     [isCreatorUser]="true"
                     [user]="getUser(1)"
+                    [userAnonymous]="getUserAnonymous(1)"
                 ></app-alert-user>
             </div>
         </div>
         <div class="col-12 col-sm-8">
-            <h5>Últimos Movimientos - {{ alert.creationDate | date:'dd/MM/yyyy h:mm a' }}</h5>
+            <h5>
+                Últimos Movimientos -
+                {{ alert.creationDate | date: "dd/MM/yyyy h:mm a" }}
+            </h5>
             <app-alert-last-movements
                 [alert]="getAlertMovements()"
             ></app-alert-last-movements>
-            <app-alert-map [alertCoordinates]="getAlertCoordinates()"></app-alert-map>
+            <app-alert-map
+                [alertCoordinates]="getAlertCoordinates()"
+            ></app-alert-map>
         </div>
     </div>
 </div>

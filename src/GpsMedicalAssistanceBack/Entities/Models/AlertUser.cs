@@ -16,8 +16,8 @@ namespace Entities.Models
         [Required]
         public int Id_Alert { get; set; }
 
-        [Required]
-        public int Id_User { get; set; }
+        public int? Id_User { get; set; }
+        public int? Id_UserAnonymous { get; set; }
 
         [Required]
         public int Id_AlertUserType { get; set; }
@@ -27,7 +27,10 @@ namespace Entities.Models
         public Alert Alert { get; set; }
 
         [ForeignKey(nameof(Id_User))]
-        public User User { get; set; }
+        public User? User { get; set; }
+
+        [ForeignKey(nameof(Id_UserAnonymous))]
+        public UserAnonymous? UserAnonymous { get; set; }
 
         [ForeignKey(nameof(Id_AlertUserType))]
         public AlertUserType AlertUserType { get; set; }

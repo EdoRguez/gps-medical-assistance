@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack.csproj": {}
+    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/GpsMedicalAssistanceBack.csproj": {}
   },
   "projects": {
     "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/Entities.csproj": {
@@ -73,14 +73,14 @@
         }
       }
     },
-    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack.csproj": {
+    "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/GpsMedicalAssistanceBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack.csproj",
+        "projectUniqueName": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/GpsMedicalAssistanceBack.csproj",
         "projectName": "GpsMedicalAssistanceBack",
-        "projectPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack.csproj",
+        "projectPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/GpsMedicalAssistanceBack.csproj",
         "packagesPath": "/Users/pc/.nuget/packages/",
-        "outputPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/",
+        "outputPath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/pc/.nuget/NuGet/NuGet.Config"
