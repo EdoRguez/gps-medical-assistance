@@ -19,38 +19,46 @@ namespace Repository.Extensions
                 return alerts;
 
             if (!String.IsNullOrEmpty(parameters.Name))
-                 alerts = alerts.Where(x =>
-                                            x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.Name
-                                                        .ToUpper()
-                                                        .Contains(parameters.Name.ToUpper()));
+                alerts = alerts.Where(x =>
+                                           x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.Name
+                                                       .ToUpper()
+                                                       .Contains(parameters.Name.ToUpper()) ||
+                                            x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).UserAnonymous.Name
+                                                       .ToUpper()
+                                                       .Contains(parameters.Name.ToUpper()));
 
             if (!String.IsNullOrEmpty(parameters.LastName))
-                 alerts = alerts.Where(x =>
-                                            x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.LastName
-                                                        .ToUpper()
-                                                        .Contains(parameters.LastName.ToUpper()));
+                alerts = alerts.Where(x =>
+                                           x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.LastName
+                                                       .ToUpper()
+                                                       .Contains(parameters.LastName.ToUpper()));
 
-            if(!String.IsNullOrEmpty(parameters.IdentificationType))
+            if (!String.IsNullOrEmpty(parameters.IdentificationType))
                 alerts = alerts.Where(x =>
                                             x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.Identification
+                                                        .Contains(parameters.IdentificationType) ||
+                                            x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).UserAnonymous.Identification
                                                         .Contains(parameters.IdentificationType));
 
-            if(!String.IsNullOrEmpty(parameters.Identification))
+            if (!String.IsNullOrEmpty(parameters.Identification))
                 alerts = alerts.Where(x =>
                                             x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.Identification
+                                                        .Contains(parameters.Identification) ||
+                                            x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).UserAnonymous.Identification
                                                         .Contains(parameters.Identification));
 
-            if(parameters.Age is not null)
+            if (parameters.Age is not null)
             {
                 int currentYear = DateTime.Today.Year;
                 alerts = alerts.Where(x =>
-                                            (currentYear - x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.BirthDate.Year) == parameters.Age);
+                                            (currentYear - x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).User.BirthDate.Year) == parameters.Age ||
+                                            x.AlertUsers.First(x => x.Id_AlertUserType == parameters.AlertUserTypeId).UserAnonymous.Age == parameters.Age);
             }
 
-            if(parameters.InitDate is not null)
+            if (parameters.InitDate is not null)
                 alerts = alerts.Where(x => x.CreationDate.Date >= parameters.InitDate.Value.Date);
 
-            if(parameters.EndDate is not null)
+            if (parameters.EndDate is not null)
                 alerts = alerts.Where(x => x.CreationDate.Date <= parameters.EndDate.Value.Date);
 
 

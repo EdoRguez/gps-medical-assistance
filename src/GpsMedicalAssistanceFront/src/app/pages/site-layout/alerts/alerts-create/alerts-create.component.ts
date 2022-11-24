@@ -27,6 +27,7 @@ import { Alert } from '../interfaces/alert.interface';
 import { ModalAlertCreatedComponent } from './modal-alert-created/modal-alert-created.component';
 import { ModalUserAnonymousCreateComponent } from './modal-user-anonymous-create/modal-user-anonymous-create.component';
 import { UserAnonymous } from '../interfaces/user-anonymous.interface';
+import { ModalLocationMessageComponent } from './modal-location-message/modal-location-message.component';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -58,7 +59,7 @@ export class AlertsCreateComponent implements OnInit, OnDestroy {
     private map: any;
     private lat!: number;
     private lon!: number;
-    private zoom!: number;
+    private zoom: number = 17;
 
     constructor(
         private _mapSearchLocationSvc: MapSearchLocationService,
@@ -70,12 +71,26 @@ export class AlertsCreateComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.isMapLoading = false;
-        this.lat = 10.4834659;
-        this.lon = -66.8091149;
-        this.zoom = 17;
+        const modalLocationMessageRef = this.modalService.open(
+            ModalLocationMessageComponent,
+            {
+                backdrop: 'static',
+                keyboard: false,
+                centered: true,
+            }
+        );
 
-        this.initMap();
+        navigator.geolocation.getCurrentPosition(
+            (result: GeolocationPosition) => {
+                this.lat = result.coords.latitude;
+                this.lon = result.coords.longitude;
+
+                this.isMapLoading = false;
+                this.initMap();
+
+                modalLocationMessageRef.dismiss();
+            }
+        );
     }
 
     ngOnDestroy(): void {
