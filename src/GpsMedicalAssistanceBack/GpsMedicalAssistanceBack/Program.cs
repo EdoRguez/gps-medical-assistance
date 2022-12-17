@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.ConfigureCors();
     builder.Services.ConfigureDbContext(builder.Configuration);
     builder.Services.ConfigureRepositoryManager();
+    builder.Services.ConfigureRepositoryServices();
     builder.Services.AddAutoMapper(typeof(Program));
 
     builder.Services.AddControllers().AddJsonOptions(options =>

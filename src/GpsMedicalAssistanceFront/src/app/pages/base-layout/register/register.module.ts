@@ -5,7 +5,7 @@ import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { RegisterPersonalInfoComponent } from './register-personal-info/register-personal-info.component';
 import { RegisterFamilyComponent } from './register-family/register-family.component';
-import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterSuccessComponent } from './register-success/register-success.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +37,7 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
         FormsModule,
         ReactiveFormsModule,
         NgbModule,
+        NgbNavModule,
         ModalDeleteConfirmModule,
         ModalMessageModule
     ],

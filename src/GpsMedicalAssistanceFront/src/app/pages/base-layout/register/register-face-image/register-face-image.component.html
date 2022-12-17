@@ -1,48 +1,119 @@
 <div class="row">
     <div class="col-12 d-flex flex-column align-items-center">
-        <img src="assets/icons/face_detection.png" class="face-icon">
-        <span class="face-information">Arrastra y suelta una imagen en el recuadro de abajo donde se vea tu rostro con buena resolución e iluminación</span>
-    </div>
-
-    <div class="col-12 d-flex flex-column align-items-center mt-5">
-        <label
-            class="uploader"
-            ondragover="return false;"
-            [class.loaded]="loaded"
-            [style.outlineColor]="getImageBoxColor()"
-            (dragenter)="handleDragEnter()"
-            (dragleave)="handleDragLeave()"
-            (drop)="handleDrop($event)"
+        <img src="assets/icons/face_detection.png" class="face-icon" />
+        <span class="face-information"
+            >Arrastra y suelta una imagen en el recuadro de abajo donde se vea
+            tu rostro con buena resolución e iluminación, o toma una foto sin nada que te tape el rostro y sin expresión facial </span
         >
-            <i
-                class="icon fa-regular fa-file"
-                [style.color]="getImageBoxColor()"
-            ></i>
-        
-            <img
-                [src]="imageSrc"
-                (load)="handleImageLoad()"
-                [class.loaded]="imageLoaded"
-            />
-        
-            <input
-                type="file"
-                name="file"
-                accept="image/*"
-                (change)="handleInputChange($event)"
-            />
-        </label>
-        <span *ngIf="showImageFormatError" class="text-danger mt-3">* El formato de imagen debe ser PNG, JPG o JPEG</span>
-        <span *ngIf="isSubmittedPage" class="text-danger mt-3">* Debe subir una imagen de su rostro</span>
     </div>
 
-    <div class="col-12 d-flex justify-content-center mt-5">
-        <span class="face-information">GPS Medical Assistance utiliza reconocimiento facial para facilitar el trabajo de identificarte si sufres un accidente</span>
+    <ul ngbNav #nav="ngbNav" [(activeId)]="activeTabId" class="nav-tabs p-0">
+        <li [ngbNavItem]="1" class="w-50" (click)="onChangeTab()">
+            <a ngbNavLink class="text-center">Subir Archivo</a>
+            <ng-template ngbNavContent>
+                <div class="col-12 d-flex flex-column align-items-center py-2">
+                    <label
+                        class="uploader"
+                        ondragover="return false;"
+                        [class.loaded]="loaded"
+                        [style.outlineColor]="getImageBoxColor()"
+                        (dragenter)="handleDragEnter()"
+                        (dragleave)="handleDragLeave()"
+                        (drop)="handleDrop($event)"
+                    >
+                        <i
+                            class="icon fa-regular fa-file"
+                            [style.color]="getImageBoxColor()"
+                        ></i>
+
+                        <img
+                            [src]="imageSrc"
+                            (load)="handleImageLoad()"
+                            [class.loaded]="imageLoaded"
+                        />
+
+                        <input
+                            type="file"
+                            name="file"
+                            accept="image/*"
+                            (change)="handleInputChange($event)"
+                        />
+                    </label>
+                    <span *ngIf="showImageFormatError" class="text-danger mt-3"
+                        >* El formato de imagen debe ser PNG, JPG o JPEG</span
+                    >
+                    <span *ngIf="isSubmittedPage" class="text-danger mt-3"
+                        >* Debe subir una imagen de su rostro</span
+                    >
+                </div>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="2" class="w-50" (click)="onChangeTab()">
+            <a ngbNavLink class="text-center">Capturar Foto</a>
+            <ng-template ngbNavContent>
+                <div class="d-flex flex-column align-items-center">
+                    <div *ngIf="!isCameraRunning && !this.imageSrc" class="camera-off-box" (click)="onStartCamera()">
+                        <img src="assets/icons/camera.png" class="img-fluid camera-logo">
+                    </div>
+                    <video
+                        #CameraVideoRef
+                        width="320"
+                        height="240"
+                        autoplay
+                        class="camera-video"
+                        [hidden]="this.imageSrc"
+                    ></video>
+                    <canvas
+                        #CameraPhotoRef
+                        width="320"
+                        height="240"
+                        [hidden]="!this.imageSrc"
+                    ></canvas>
+                    <button
+                        *ngIf="!isCameraRunning"
+                        (click)="onStartCamera()"
+                        class="btn btn-main mt-1"
+                    >
+                        {{
+                            !this.imageSrc
+                                ? "Iniciar Cámara"
+                                : "Capturar nueva foto"
+                        }}
+                    </button>
+                    <button
+                        *ngIf="isCameraRunning"
+                        (click)="onTakePhoto()"
+                        class="btn btn-main mt-1"
+                    >
+                        Guardar Foto
+                    </button>
+                    <span *ngIf="isSubmittedPage" class="text-danger mt-3"
+                        >* Debe tomar una foto de su rostro</span
+                    >
+                    <span *ngIf="showCameraBlockedError" class="text-danger mt-3"
+                        >* ¡Ops! Debes permitir el acceso a tu cámara en el navegador</span
+                    >
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="tab-content-style"></div>
+
+    <div class="col-12 d-flex justify-content-center mt-1">
+        <span class="face-information"
+            >GPS Medical Assistance utiliza reconocimiento facial para facilitar
+            el trabajo de identificarte si sufres un accidente</span
+        >
     </div>
 
     <div class="col-12">
         <div class="w-100 d-flex justify-content-end mt-5">
-            <button type="button" class="btn btn-main d-flex" (click)="nextSetp()">
+            <button
+                type="button"
+                class="btn btn-main d-flex"
+                (click)="nextStep()"
+            >
                 Siguiente
                 <div class="btn-icon-circle-right">
                     <i class="fa-solid fa-chevron-right"></i>

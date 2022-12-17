@@ -13,6 +13,10 @@ export class RegisterManagerService {
 
     constructor() {}
 
+    clearFields(): void {
+        this.authData = this.createEmptyData();
+    }
+
     getPersonalInfo(): AuthenticationRegister {
         return this.authData;
     }

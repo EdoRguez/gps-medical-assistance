@@ -1,0 +1,44 @@
+<p class="text-center">
+    Toma una foto sin nada que te tape la cara y sin expresión facial
+</p>
+
+<div class="d-flex flex-column align-items-center">
+    <div
+        *ngIf="!isCameraRunning && !this.imageSrc"
+        class="camera-off-box"
+        (click)="onStartCamera()"
+    >
+        <img src="assets/icons/camera.png" class="img-fluid camera-logo" />
+    </div>
+    <video
+        #CameraVideoRef
+        width="320"
+        height="240"
+        autoplay
+        class="camera-video"
+        [hidden]="this.imageSrc"
+    ></video>
+    <canvas
+        #CameraPhotoRef
+        width="320"
+        height="240"
+        [hidden]="!this.imageSrc"
+    ></canvas>
+    <button
+        *ngIf="!isCameraRunning"
+        (click)="onStartCamera()"
+        class="btn btn-main mt-1"
+    >
+        {{ !this.imageSrc ? "Iniciar Cámara" : "Capturar nueva foto" }}
+    </button>
+    <button
+        *ngIf="isCameraRunning"
+        (click)="onTakePhoto()"
+        class="btn btn-main mt-1"
+    >
+        Capturar Foto
+    </button>
+    <span *ngIf="showCameraBlockedError" class="text-danger mt-3"
+        >* ¡Ops! Debes permitir el acceso a tu cámara en el navegador</span
+    >
+</div>
