@@ -12,6 +12,7 @@
 /src/GpsMedicalAssistanceFront/node_modules
 /src/GpsMedicalAssistanceFront/.angular/cache
 /src/GpsMedicalAssistanceBack/.vs
+/src/GpsMedicalAssistanceBack/FaceRecognitionService/node_modules
 
 # profiling files
 chrome-profiler-events*.json
