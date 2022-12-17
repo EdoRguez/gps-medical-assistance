@@ -1,0 +1,18 @@
+<div class="modal-header d-flex justify-content-center">
+    <h4 class="modal-title" ngbAutofocus>Reconocimiento Facial</h4>
+    <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="activeModal.close(null)"
+    ></button>
+</div>
+<div class="modal-body">
+    <div [hidden]="modalContentType !== 1">
+        <app-camera-recognition (userFound)="showUserFound($event)"></app-camera-recognition>
+    </div>
+    <div [hidden]="modalContentType !== 2">
+        <app-result-recognition [user$]="userFound.asObservable()" (resultStatus)="processResultStatus($event)"></app-result-recognition>
+    </div>
+
+</div>

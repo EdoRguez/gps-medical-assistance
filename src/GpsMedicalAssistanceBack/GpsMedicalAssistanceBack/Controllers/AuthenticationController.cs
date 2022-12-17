@@ -5,6 +5,7 @@ using Entities.Models;
 using GpsMedicalAssistanceBack.Utils.Authentication;
 using GpsMedicalAssistanceBack.Utils.General;
 using Interfaces.Core;
+using Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GpsMedicalAssistanceBack.Controllers
@@ -16,12 +17,14 @@ namespace GpsMedicalAssistanceBack.Controllers
         private readonly IRepositoryManager _repo;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
+        private IFaceRecognitionServiceRepository _faceRecognitionSvcRepo;
 
-        public AuthenticationController(IRepositoryManager repo, IMapper mapper, IWebHostEnvironment env)
+        public AuthenticationController(IRepositoryManager repo, IFaceRecognitionServiceRepository faceRecognitionSvcRepo, IMapper mapper, IWebHostEnvironment env)
         {
             _repo = repo;
             _mapper = mapper;
             _env = env;
+            _faceRecognitionSvcRepo = faceRecognitionSvcRepo;
         }
 
         [HttpPost("login")]
@@ -50,15 +53,16 @@ namespace GpsMedicalAssistanceBack.Controllers
             }
 
             var familyTypeIds = dto.User.Families.Select(x => x.Id_FamilyType).ToList();
-            if(!(await _repo.FamilyType.AreIdsValid(familyTypeIds)))
+            if (!(await _repo.FamilyType.AreIdsValid(familyTypeIds)))
             {
                 ModelState.AddModelError(AuthenticationSettings.FieldFamilies, AuthenticationSettings.ErrorMessageFamiliesIdFamilyType);
                 return BadRequest(ModelState);
             }
 
-            string imagePath = ImageManager.Base64ToImagePath(dto.User.ImagePath, string.Format("{0}-User", Guid.NewGuid()), "UserFaceImage", _env);
+            string tempImagePath = dto.User.ImagePath;
+            string imagePath = ImageManager.Base64ToImagePath(tempImagePath, string.Format("{0}-User", Guid.NewGuid()), "UserFaceImage", _env);
 
-            if(string.IsNullOrEmpty(imagePath))
+            if (string.IsNullOrEmpty(imagePath))
             {
                 ModelState.AddModelError(AuthenticationSettings.FieldImagePath, AuthenticationSettings.ErrorMessageImagePath);
                 return BadRequest(ModelState);
@@ -69,6 +73,9 @@ namespace GpsMedicalAssistanceBack.Controllers
             User userToCreate = _mapper.Map<User>(dto.User);
             var createdUser = _repo.Authentication.Register(userToCreate, dto.Password);
             await _repo.SaveAsync();
+
+            IFormFile imageFile = ImageManager.Base64ToFormFile(tempImagePath, createdUser.Id.ToString());
+            await _faceRecognitionSvcRepo.CreateFace(imageFile, createdUser.Id);
 
             var dtoUser = _mapper.Map<UserDto>(createdUser);
 

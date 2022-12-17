@@ -28,6 +28,7 @@ import { ModalAlertCreatedComponent } from './modal-alert-created/modal-alert-cr
 import { ModalUserAnonymousCreateComponent } from './modal-user-anonymous-create/modal-user-anonymous-create.component';
 import { UserAnonymous } from '../interfaces/user-anonymous.interface';
 import { ModalLocationMessageComponent } from './modal-location-message/modal-location-message.component';
+import { ModalFaceRecognitionComponent } from './modal-face-recognition/modal-face-recognition.component';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -550,8 +551,6 @@ export class AlertsCreateComponent implements OnInit, OnDestroy {
                     }
                 );
                 modalAlertCreatedRef.componentInstance.idAlert = x.id;
-                console.log('check returned');
-                console.log(x);
             },
             error: (err) => {
                 console.log('err');
@@ -583,5 +582,17 @@ export class AlertsCreateComponent implements OnInit, OnDestroy {
 
         let group = L.featureGroup(markerList);
         this.map.fitBounds(group.getBounds());
+    }
+
+    onStartFaceRecognition(): void {
+        const modalFaceRecognitionRef = this.modalService.open(ModalFaceRecognitionComponent);
+        modalFaceRecognitionRef.result.then((user: User | null) => {
+            if(user) {
+                const userSplitIdentification = user.identification.split('-');
+                this.form.controls['identificationType'].setValue(userSplitIdentification[0]);
+                this.form.controls['identification'].setValue(userSplitIdentification[1]);
+            }
+        },
+        () => {})
     }
 }

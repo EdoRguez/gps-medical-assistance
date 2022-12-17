@@ -23,6 +23,9 @@ import { AlertMapComponent } from './alert-details/alert-map/alert-map.component
 import { GlobalPipesModule } from 'src/app/shared/pipes/global-pipes.module';
 import { ModalUserAnonymousCreateComponent } from './alerts-create/modal-user-anonymous-create/modal-user-anonymous-create.component';
 import { ModalLocationMessageComponent } from './alerts-create/modal-location-message/modal-location-message.component';
+import { ModalFaceRecognitionComponent } from './alerts-create/modal-face-recognition/modal-face-recognition.component';
+import { CameraRecognitionComponent } from './alerts-create/modal-face-recognition/camera-recognition/camera-recognition.component';
+import { ResultRecognitionComponent } from './alerts-create/modal-face-recognition/result-recognition/result-recognition.component';
 
 registerLocaleData(localeEs, 'es', localeEsExtra);
 
@@ -39,7 +42,10 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
     AlertLastMovementsComponent,
     AlertMapComponent,
     ModalUserAnonymousCreateComponent,
-    ModalLocationMessageComponent
+    ModalLocationMessageComponent,
+    ModalFaceRecognitionComponent,
+    CameraRecognitionComponent,
+    ResultRecognitionComponent
   ],
   imports: [
     CommonModule,

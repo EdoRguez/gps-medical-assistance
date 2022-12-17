@@ -5,7 +5,7 @@
 .logo-text {
     font-family: 'Roboto', sans-serif;
     color: white;
-    font-size: 16px; 
+    font-size: 16px;
     margin-left: 10px;
     font-weight: bold;
 }
@@ -13,6 +13,7 @@
 .main-image-box {
     background-image: linear-gradient(to bottom, rgb(9, 25, 255), rgb(97, 144, 255));
     height: 100vh;
+    position: fixed;
 }
 
 .main-form-box {
@@ -32,7 +33,7 @@
 .image-text {
     font-family: 'Roboto', sans-serif;
     color: white;
-    font-size: 36px; 
+    font-size: 36px;
     font-weight: bold;
     text-align: center;
 }

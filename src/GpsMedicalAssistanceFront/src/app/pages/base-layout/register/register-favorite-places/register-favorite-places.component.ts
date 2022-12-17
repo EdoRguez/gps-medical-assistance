@@ -142,17 +142,29 @@ export class RegisterFavoritePlacesComponent implements OnInit, OnDestroy {
                     this.loaderSvc.toggleLoader(false);
                     this.changeStepClick.next(true);
                 },
-                error: (err) => {
+                error: (err: any) => {
+                    let messageError =
+                        'Hubo un error guardando los campos, por favor valida los datos ingresados';
+
+                    if (err.error.Email)
+                        messageError = 'El correo ingresado ya está en uso, por favor ingresa uno distinto';
+                    if (err.error.Families)
+                        messageError =
+                            'Error con las familias ingresaas, por favor valida los datos';
+                    if (err.error.ImagePath)
+                        messageError =
+                            'Error con la imagen ingresada, por favor valida la imagen';
+
                     const modalMessageRef = this.modalService.open(
                         ModalMessageComponent
                     );
 
                     modalMessageRef.componentInstance.title = 'Error';
                     modalMessageRef.componentInstance.description =
-                        'Hubo un error guardando los campos, por favor valida los datos ingresados';
+                        messageError;
 
                     this.loaderSvc.toggleLoader(false);
-                }
+                },
             });
         }
     }

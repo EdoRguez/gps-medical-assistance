@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4 mb-5">
     <button type="button" class="btn btn-main d-flex" [routerLink]="['..']">
         <div class="btn-icon-circle-left">
             <i class="fa-solid fa-chevron-left"></i>
@@ -109,11 +109,25 @@
                                     isFormSubmitted
                                 "
                                 class="invalid-feedback"
-                                >* La cédula es requrida</span
+                                >* La cédula es requerida</span
                             >
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-12 col-sm-6 offset-sm-3 mt-3">
+                <div class="alert alert-success w-100 text-center">
+                    <h4 class="alert-heading">¡Reconocimiento Facial!</h4>
+                    <p>Ahora tienes la opción de buscar a un usuario en riesgo a través de reconocimiento facial, solo presiona el botón de abajo para iniciar el reconocimiento</p>
+                    <hr>
+                    <p>Buscar cédula del usuario por reconocimiento facial</p>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-second" (click)="onStartFaceRecognition()">
+                            <img src="assets/icons/face_detection_2.png" class="img-fluid face-detection-img">
+                        </button>
+                    </div>
+                  </div>
+
             </div>
             <div class="col-12 d-flex justify-content-center mt-5">
                 <button
@@ -127,8 +141,3 @@
         </div>
     </form>
 </div>
-
-<br />
-<br />
-<br />
-<br />

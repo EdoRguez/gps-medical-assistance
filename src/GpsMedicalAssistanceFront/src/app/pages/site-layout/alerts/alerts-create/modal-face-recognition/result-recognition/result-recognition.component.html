@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+    <div *ngIf="user">
+        <p class="text-center">¡Hemos encontrado un usuario!</p>
+        <div class="my-4 text-center">
+            <img
+                class="img-fluid img-user"
+                [src]="user.imagePath | apiImageBase64"
+            />
+        </div>
+
+        <h6 class="user-name">
+            {{ user.name | titlecase }} {{ user.lastName | titlecase }}
+        </h6>
+        <h6 class="user-identification">
+            <b>Cédula:</b> {{ user.identification }}
+        </h6>
+        <hr>
+        <p class="text-center mt-2">¿Éste es el usuario que estás buscando?</p>
+        <div class="d-flex justify-content-around">
+            <button class="btn btn-main" (click)="onProcessResultStatus(2)">No</button>
+            <button class="btn btn-main" (click)="onProcessResultStatus(1)">Si</button>
+        </div>
+    </div>
+    <div *ngIf="!user">
+        <p class="text-center">¡Ops! Ningún usuario fue encontrado</p>
+        <div class="text-center my-4">
+            <img src="assets/icons/search_not_found.png" class="img-fluid text-center not-found-icon">
+        </div>
+        <p class="text-center">Recuerda que es necesario tomar la foto con buena iluminación, sin nada que te tape el rostro y sin expresión facial</p>
+        <p class="text-center">¿Quieres volver a intentar buscar un usuario?</p>
+        <div class="d-flex justify-content-around">
+            <button class="btn btn-main" (click)="onProcessResultStatus(3)">No</button>
+            <button class="btn btn-main" (click)="onProcessResultStatus(2)">Si</button>
+        </div>
+    </div>
+</div>

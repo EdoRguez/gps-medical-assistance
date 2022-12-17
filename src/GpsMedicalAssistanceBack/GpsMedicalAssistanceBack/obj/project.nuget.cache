@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "OYhW8zamiCMgE1ldHOzeGgkpfQ8uvLIj0/H1eWFPpAk/d6aLstbS81fceTIQncK3yM4GEA/BhLm6AzkUc2oFWg==",
+  "dgSpecHash": "z6kvbr4N9ufOE/r8RSQ4wzS/32aVJg594SJbgy3oyfRz2vYmi1BM5h4cm8HPnPL7HMr/XU7LkHkOOpIiuv728A==",
   "success": true,
   "projectFilePath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/GpsMedicalAssistanceBack.csproj",
   "expectedPackageFiles": [
     "/Users/pc/.nuget/packages/automapper/12.0.0/automapper.12.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.aspnetcore.http.features/5.0.17/microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "/Users/pc/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/microsoft.entityframeworkcore/6.0.10/microsoft.entityframeworkcore.6.0.10.nupkg.sha512",
     "/Users/pc/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.10/microsoft.entityframeworkcore.abstractions.6.0.10.nupkg.sha512",
@@ -32,6 +33,7 @@
     "/Users/pc/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "/Users/pc/.nuget/packages/system.io.pipelines/5.0.2/system.io.pipelines.5.0.2.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []

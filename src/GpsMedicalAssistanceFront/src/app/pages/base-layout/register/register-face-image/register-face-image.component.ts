@@ -1,4 +1,10 @@
-import { Component, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { RegisterManagerService } from '../services/register-manager.service';
 
@@ -10,20 +16,26 @@ import { RegisterManagerService } from '../services/register-manager.service';
 export class RegisterFaceImageComponent implements OnInit {
     @Output() changeStepClick = new Subject<boolean>();
 
+    @ViewChild('CameraVideoRef') cameraVideoRef!: ElementRef;
+    @ViewChild('CameraPhotoRef') cameraPhotoRef!: ElementRef;
+
+    activeTabId: number = 1;
     dragging: boolean = false;
     loaded: boolean = false;
     imageLoaded: boolean = false;
     imageSrc: string = '';
     showImageFormatError: boolean = false;
     isSubmittedPage: boolean = false;
+    isCameraRunning: boolean = false;
+    showCameraBlockedError: boolean = false;
 
     constructor(private registerManagerSvc: RegisterManagerService) {}
 
     ngOnInit(): void {
-        const userImage: string | null = this.registerManagerSvc.getUserImageFace();
+        const userImage: string | null =
+            this.registerManagerSvc.getUserImageFace();
 
-        if(userImage)
-            this.imageSrc = userImage;
+        if (userImage) this.imageSrc = userImage;
     }
 
     handleDragEnter() {
@@ -79,7 +91,7 @@ export class RegisterFaceImageComponent implements OnInit {
         this.loaded = true;
     }
 
-    nextSetp(): void {
+    nextStep(): void {
         this.isSubmittedPage = true;
         this.showImageFormatError = false;
 
@@ -87,5 +99,45 @@ export class RegisterFaceImageComponent implements OnInit {
             this.registerManagerSvc.updateUserImageFace(this.imageSrc);
             this.changeStepClick.next(true);
         }
+    }
+
+    async onStartCamera(): Promise<void> {
+        this.imageSrc = '';
+        this.isCameraRunning = true;
+        this.showCameraBlockedError = false;
+
+        let stream = await navigator.mediaDevices
+            .getUserMedia({
+                video: true,
+                audio: false,
+            })
+            .catch((err) => {
+                this.imageSrc = '';
+                this.isCameraRunning = false;
+                this.isSubmittedPage = false;
+                this.showCameraBlockedError = true;
+            });
+        this.cameraVideoRef.nativeElement.srcObject = stream;
+    }
+
+    onTakePhoto(): void {
+        this.isCameraRunning = false;
+        this.cameraPhotoRef.nativeElement
+            .getContext('2d')
+            .drawImage(
+                this.cameraVideoRef.nativeElement,
+                0,
+                0,
+                this.cameraPhotoRef.nativeElement.width,
+                this.cameraPhotoRef.nativeElement.height
+            );
+
+        this.imageSrc =
+            this.cameraPhotoRef.nativeElement.toDataURL('image/jpeg');
+    }
+
+    onChangeTab(): void {
+        this.isCameraRunning = false;
+        this.imageSrc = '';
     }
 }

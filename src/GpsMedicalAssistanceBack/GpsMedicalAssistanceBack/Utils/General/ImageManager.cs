@@ -39,15 +39,31 @@ namespace GpsMedicalAssistanceBack.Utils.General
             }
         }
 
+        public static IFormFile Base64ToFormFile(string base64, string imageName)
+        {
+            Regex regex = new Regex(@"^[\w/\:.-]+;base64,");
+            base64 = regex.Replace(base64, string.Empty);
+
+            byte[] bytes = Convert.FromBase64String(base64);
+            MemoryStream stream = new MemoryStream(bytes);
+
+            IFormFile file = new FormFile(stream, 0, bytes.Length, imageName, imageName)
+            {
+                Headers = new HeaderDictionary(),
+                ContentType = "image/jpeg"
+            };
+            return file;
+        }
+
         private static string GetFileExtension(string base64String)
         {
             var data = base64String.Substring(0, base64String.IndexOf(';'));
 
-            if(data.ToUpper().Contains("PNG"))
+            if (data.ToUpper().Contains("PNG"))
             {
                 return ".png";
             }
-            else if(data.ToUpper().Contains("JPG"))
+            else if (data.ToUpper().Contains("JPG"))
             {
                 return ".jpg";
             }

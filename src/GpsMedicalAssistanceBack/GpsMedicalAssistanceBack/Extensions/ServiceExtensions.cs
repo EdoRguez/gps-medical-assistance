@@ -1,7 +1,9 @@
 ﻿using Entities;
 using Interfaces.Core;
+using Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using Repository.Core;
+using Repository.Services;
 
 namespace GpsMedicalAssistanceBack.Extensions
 {
@@ -36,6 +38,11 @@ namespace GpsMedicalAssistanceBack.Extensions
                     .AllowAnyHeader();
                 });
             });
+        }
+
+        public static void ConfigureRepositoryServices(this IServiceCollection services)
+        {
+            services.AddHttpClient<IFaceRecognitionServiceRepository, FaceRecognitionServiceRepository>();
         }
     }
 }
