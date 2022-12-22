@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.Utils;
 using Interfaces.Core;
 using Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,11 @@ namespace GpsMedicalAssistanceBack.Extensions
         public static void ConfigureRepositoryServices(this IServiceCollection services)
         {
             services.AddHttpClient<IFaceRecognitionServiceRepository, FaceRecognitionServiceRepository>();
+        }
+
+        public static void ConfigureTwilioSettings(this IServiceCollection services, ConfigurationManager configuration)
+        {
+            services.Configure<TwilioSMSSettings>(configuration.GetSection(TwilioSMSSettings.SectionName));
         }
     }
 }

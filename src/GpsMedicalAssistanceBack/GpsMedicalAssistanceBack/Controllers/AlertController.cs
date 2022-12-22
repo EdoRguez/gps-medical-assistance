@@ -3,9 +3,11 @@ using Entities.DataTransferObjects.Alert;
 using Entities.DataTransferObjects.User;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Entities.Utils;
 using Interfaces.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace GpsMedicalAssistanceBack.Controllers
 {
@@ -15,11 +17,13 @@ namespace GpsMedicalAssistanceBack.Controllers
     {
         private readonly IRepositoryManager _repo;
         private readonly IMapper _mapper;
+        private readonly TwilioSMSSettings _twilioSMSSettings;
 
-        public AlertController(IRepositoryManager repo, IMapper mapper)
+        public AlertController(IRepositoryManager repo, IMapper mapper, IOptions<TwilioSMSSettings> twilioSMSSettings)
         {
             _repo = repo;
             _mapper = mapper;
+            _twilioSMSSettings = twilioSMSSettings.Value;
         }
 
         [HttpPost("Filter")]
@@ -62,6 +66,8 @@ namespace GpsMedicalAssistanceBack.Controllers
 
             _repo.Alert.CreateAlert(model);
             await _repo.SaveAsync();
+
+            // Use Twilio Settings ans twilio to send SMS
 
             var returnAlert = _mapper.Map<AlertDto>(model);
 

@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.ConfigureDbContext(builder.Configuration);
     builder.Services.ConfigureRepositoryManager();
     builder.Services.ConfigureRepositoryServices();
+    builder.Services.ConfigureTwilioSettings(builder.Configuration);
     builder.Services.AddAutoMapper(typeof(Program));
 
     builder.Services.AddControllers().AddJsonOptions(options =>
