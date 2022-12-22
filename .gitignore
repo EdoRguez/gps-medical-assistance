@@ -9,10 +9,15 @@
 
 # dependencies
 /node_modules
+/src/.vscode
 /src/GpsMedicalAssistanceFront/node_modules
+/src/GpsMedicalAssistanceFront/.vscode
 /src/GpsMedicalAssistanceFront/.angular/cache
 /src/GpsMedicalAssistanceBack/.vs
+/src/GpsMedicalAssistanceBack/.vscode
+/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/UserFaceImage
 /src/GpsMedicalAssistanceBack/FaceRecognitionService/node_modules
+/src/GpsMedicalAssistanceBack/FaceRecognitionService/tmp
 
 # profiling files
 chrome-profiler-events*.json
