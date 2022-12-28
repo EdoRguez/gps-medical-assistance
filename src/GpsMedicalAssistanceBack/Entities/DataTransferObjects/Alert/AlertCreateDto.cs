@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Entities.DataTransferObjects.Alert
 {
     public class AlertCreateDto
-    { 
+    {
         [Required]
         public decimal CurrentLocationLatitude { get; set; }
 

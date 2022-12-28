@@ -4,6 +4,7 @@ using Entities.DataTransferObjects.User;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Entities.Utils;
+using GpsMedicalAssistanceBack.Utils.TwilioSMS;
 using Interfaces.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -67,7 +68,26 @@ namespace GpsMedicalAssistanceBack.Controllers
             _repo.Alert.CreateAlert(model);
             await _repo.SaveAsync();
 
-            // Use Twilio Settings ans twilio to send SMS
+            var alertUser = dto.AlertUsers.FirstOrDefault(x => x.Id_AlertUserType == 2 && x.Id_User != null);
+            if(alertUser != null)
+            {
+                List<IncludesGeneral> includes = new List<IncludesGeneral>()
+                {
+                    new IncludesGeneral() { Name = "Families" }
+                };
+
+                var user = await _repo.User.GetUser((int)alertUser.Id_User, includes, false);
+
+                if(user != null && user.Families != null)
+                {
+                    string smsMessage = $"ALERTA - Gps Medical Assistance \n\n {user.Name} sufrió un accidente \n\n Para más detalles visita http://localhost:4200/alerts/{model.Id}";
+
+                    List<string> familyPhoneNumbers = user.Families.Select(x => x.Phone.Replace("-", string.Empty)).ToList();
+
+                    TwilioSMS twilio = new TwilioSMS(_twilioSMSSettings);
+                    twilio.SendMultipleSMS(familyPhoneNumbers, smsMessage);
+                }
+            }
 
             var returnAlert = _mapper.Map<AlertDto>(model);
 
