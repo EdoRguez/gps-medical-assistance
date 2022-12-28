@@ -88,3 +88,10 @@ C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistanc
 /Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/GpsMedicalAssistanceBack.pdb
 /Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/GpsMedicalAssistanceBack.genruntimeconfig.cache
 /Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/ref/GpsMedicalAssistanceBack.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Twilio.dll
