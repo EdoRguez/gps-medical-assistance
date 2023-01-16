@@ -68,7 +68,7 @@ exports.postFace = async (req, res) => {
   const label = req.body.label;
   let result = await uploadLabeledImages(File1, label);
 
-  if (result) {
+  if (!!result) {
     res.send({ isSuccess: true });
   } else {
     res.send({ isSuccess: false });
