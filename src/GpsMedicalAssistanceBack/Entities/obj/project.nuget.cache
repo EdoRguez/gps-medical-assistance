@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "K0rpjkUlqVt8EbcyypWzhklylwf73vE/AzTSkShyxRs2nMJYwVdnB5XPKbZGkkdUVaL3O7UiiRTvmgWFE2wBDg==",
+  "dgSpecHash": "k9wz1Zh9ZB0B4heX5NEJy+3GMGKKdyVX8M9pCeedF03hYaitkvJElhwnPjAPj9rmjJY/eAsNOwhZxT3IB+OFyg==",
   "success": true,
   "projectFilePath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Entities/Entities.csproj",
   "expectedPackageFiles": [
@@ -24,7 +24,9 @@
     "/Users/pc/.nuget/packages/npgsql.entityframeworkcore.postgresql/6.0.7/npgsql.entityframeworkcore.postgresql.6.0.7.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
-    "/Users/pc/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "/Users/pc/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.netcore.app.ref/6.0.19/microsoft.netcore.app.ref.6.0.19.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.19/microsoft.aspnetcore.app.ref.6.0.19.nupkg.sha512"
   ],
   "logs": []
 }

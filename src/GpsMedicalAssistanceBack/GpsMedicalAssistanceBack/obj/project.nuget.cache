@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VqCv0wozRlktKoBPQJkvkdH3dymspWRrAvKXD4bc+ITtsbdjVmMAnku9yb671v3ea92ewQizisJth3JIx4Foxw==",
+  "dgSpecHash": "EoN/okbKaC2wsB/8KV+LyL8g5gv8Hdgl5WI+pTkuEutdl5jO8PVBiyTKxklbDA4cI+gMHmm/51yxFMtnQviqmw==",
   "success": true,
-  "projectFilePath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/gpsmedicalassistanceback/GpsMedicalAssistanceBack.csproj",
+  "projectFilePath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack.csproj",
   "expectedPackageFiles": [
     "/Users/pc/.nuget/packages/automapper/12.0.0/automapper.12.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
@@ -60,7 +60,10 @@
     "/Users/pc/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.threading/4.3.0/system.threading.4.3.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
-    "/Users/pc/.nuget/packages/twilio/6.2.0/twilio.6.2.0.nupkg.sha512"
+    "/Users/pc/.nuget/packages/twilio/6.2.0/twilio.6.2.0.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.netcore.app.ref/6.0.19/microsoft.netcore.app.ref.6.0.19.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.19/microsoft.aspnetcore.app.ref.6.0.19.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.19/microsoft.netcore.app.host.osx-arm64.6.0.19.nupkg.sha512"
   ],
   "logs": []
 }

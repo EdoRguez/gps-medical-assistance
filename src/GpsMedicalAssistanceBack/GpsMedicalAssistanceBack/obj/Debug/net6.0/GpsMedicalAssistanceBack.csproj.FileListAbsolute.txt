@@ -95,3 +95,8 @@ C:/Users/User/Documents/USM/Proyecto de Grado 1 y 2/Proyecto/GpsMedicalAssistanc
 /Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Newtonsoft.Json.dll
 /Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/bin/Debug/net6.0/Twilio.dll
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/staticwebassets/msbuild.GpsMedicalAssistanceBack.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/staticwebassets/msbuild.build.GpsMedicalAssistanceBack.props
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.GpsMedicalAssistanceBack.props
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.GpsMedicalAssistanceBack.props
+/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/GpsMedicalAssistanceBack/obj/Debug/net6.0/staticwebassets.pack.json
