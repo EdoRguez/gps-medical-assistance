@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ce4ZcGgdw60wj0PheYNP6bW9QHFqwN0VA/qSrODiVvcQJ8eB7PHR6F45byvtVYPIZeMOeE1P6qdLwLxCYHCbEQ==",
+  "dgSpecHash": "Gg+gxyx1ANcmHnoUKtoztP6NF4WsF5ClkjBSx/BiVaVGtvnr8HXzCZnetOPRqUQnGgL3KLA1vja694emMOwQwA==",
   "success": true,
   "projectFilePath": "/Users/pc/Documents/Usm/Proyecto de Grado/GPS Medical Assistance/src/GpsMedicalAssistanceBack/Repository/Repository.csproj",
   "expectedPackageFiles": [
@@ -23,7 +23,9 @@
     "/Users/pc/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "/Users/pc/.nuget/packages/system.io.pipelines/5.0.2/system.io.pipelines.5.0.2.nupkg.sha512",
-    "/Users/pc/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "/Users/pc/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.netcore.app.ref/6.0.19/microsoft.netcore.app.ref.6.0.19.nupkg.sha512",
+    "/Users/pc/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.19/microsoft.aspnetcore.app.ref.6.0.19.nupkg.sha512"
   ],
   "logs": []
 }

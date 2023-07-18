@@ -92,6 +92,9 @@ export class AlertsCreateComponent implements OnInit, OnDestroy {
                 modalLocationMessageRef.dismiss();
             }
         );
+
+        modalLocationMessageRef.dismiss();
+
     }
 
     ngOnDestroy(): void {
