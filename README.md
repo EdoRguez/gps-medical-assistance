@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h4 align="center">GPS medical assistance to notify people via SMS when an accident occurs.</h4>
+<h4 align="center">GPS medical assistance to notify people via SMS when an accident occurs using face recognition.</h4>
 
 <div align="center">
   <img src="https://github.com/EdoRguez/gps-medical-assistance/blob/master/assets/app.gif" width="720">
