@@ -27,7 +27,7 @@ This software uses the following technologies:
 - [Angular](https://angular.io/)
 - [NodeJS](https://nodejs.org/en)
 - [MongoDB](https://www.mongodb.com/)
-- [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## Site 💻
 
